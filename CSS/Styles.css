@@ -1,0 +1,92 @@
+body {
+  font-size: 18px;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display SC', serif;
+}
+
+p, a, li {
+  font-family: 'Roboto', sans-serif;
+}
+
+ .navbar-collapse{
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo img{
+  height: 45px;
+  width: 45px;
+  display: block;
+  margin: 0 auto;
+}
+
+.hero-landing {
+  background-image: url("../Images/landing-image.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+.hero-landing h1 {
+  width: 35%;
+  padding: 5%;
+  padding-left: 10%;
+}
+
+.basic-info {
+  background-color: gray;
+}
+
+.introduction {
+  padding: 3% 10% 0;
+  text-align: center;
+}
+
+.carousel-inner {
+  padding: 3% 10%;
+}
+
+.time-period {
+  display: flex;
+  flex-direction: row;
+}
+
+.time-period-description {
+  width: 75%;
+}
+
+.time-period img {
+  height: 200px;
+}
+
+.residences {
+  padding: 3% 25%;
+}
+
+.residences h2 {
+  text-align: center;
+}
+
+.residences-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5%;
+}
+
+.card {
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
+
+.card-img-top {
+  height: 200px;
+}
