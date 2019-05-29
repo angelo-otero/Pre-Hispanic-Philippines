@@ -1,0 +1,174 @@
+/* General Styles*/
+/*These are styles found on all the pages */
+body {
+  font-size: 18px;
+}
+
+/* Typgraphy */
+h1, h2, h3 {
+  font-family: 'Playfair Display SC', serif;
+}
+
+p, a, li {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Bootstrap Styles */
+.btn {
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+.card {
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+.card-img-top {
+  height: 200px;
+}
+
+.general-padding {
+  padding: 3% 10%;
+}
+
+/* Header Styles */
+ .navbar-collapse {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo img{
+  height: 45px;
+  width: 45px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Footer Styles */
+footer {
+  font-size: .85rem;
+  background-color: gray;
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 10%;
+}
+
+.links {
+  width: 16%;
+}
+
+footer ul {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.social-media {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+}
+
+.social-media i {
+  font-size: 1.5rem;
+}
+
+.reverse-row-flow {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+
+/* Home Page Styles */
+/* These are styles found on the home page */
+.hero-landing {
+  background-image: url("../Images/landing-image.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+.hero-landing h1 {
+  width: 35%;
+  padding: 5%;
+  padding-left: 10%;
+}
+
+.basic-info {
+  background-color: gray;
+}
+
+.introduction {
+  padding: 3% 10% 0;
+  text-align: center;
+}
+
+.time-period {
+  display: flex;
+  flex-direction: row;
+}
+
+.time-period-description {
+  width: 75%;
+}
+
+.time-period img {
+  height: 200px;
+}
+
+.residences {
+  padding: 3% 25%;
+}
+
+.residences h2 {
+  text-align: center;
+}
+
+.residences-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5%;
+}
+
+
+
+/* Lowland Page Styles */
+/* These are styles found on the lowland page */
+.filipino-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.filipino-group-images {
+  width: 65%;
+  margin: 0 15px 15px 0;
+}
+
+.filipino-group-img{
+  width: 100%;
+  height: auto;
+}
+
+.filipino-group-description {
+  width: 35%;
+}
+
+/* Highland Page Styles */
+/* These are styles found on the highland page */
+
+
+
+
+/* Quiz Page Styles */
+/* These are styles found on the quiz page */
