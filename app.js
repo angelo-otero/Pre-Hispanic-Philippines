@@ -8,12 +8,12 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-// const quiz = new Vue({
-//   el: '#quiz',
-//   data: {
-//
-//   }
-// });
+const quiz = new vue({
+  el: '#quiz',
+  data: {
+
+  }
+});
 
 app.get("/", function(req,res){
   res.render("index");
@@ -21,6 +21,22 @@ app.get("/", function(req,res){
 
 app.get("/lowland", function(req,res){
   res.render("lowland");
+});
+
+app.get("/highland", function(req,res){
+  res.render("highland");
+});
+
+app.get("/quiz", function(req,res){
+  res.render("quiz");
+});
+
+app.get("/about", function(req,res){
+  res.render("about");
+});
+
+app.get("/further-reading", function(req,res){
+  res.render("further-reading");
 });
 
 app.listen('3000', function(){
