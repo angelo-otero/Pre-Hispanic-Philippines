@@ -91,12 +91,6 @@ footer ul {
   font-size: 1.5rem;
 }
 
-.reverse-row-flow {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-
 /* Home Page Styles */
 /* These are styles found on the home page */
 .hero-landing {
@@ -174,6 +168,16 @@ footer ul {
 .filipino-group-description {
   width: 50%;
 }
+
+.second-filipino-group {
+  flex-direction: row-reverse;
+}
+
+.second-filipino-group .filipino-group-images {
+  margin: 0 0 15px 15px;
+}
+
+
 
 /* Highland Page Styles */
 /* These are styles found on the highland page */
