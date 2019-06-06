@@ -199,10 +199,6 @@ footer ul {
   flex-direction: row;
 }
 
-.highland-button {
-  margin-top: 15px;
-}
-
 .highland-people-img-container {
   width: 50%;
 }
@@ -212,32 +208,53 @@ footer ul {
   height: 500px;
 }
 
+.highland-group-info, .highland-people-gallery {
+  position: absolute;
+}
+
+.highland-button {
+  position: relative;
+  width: 150px;
+  top: 80%;
+  left: 20%;
+}
+
 .img-thumbnail {
   width: 150px;
   height: 150px;
-  margin: 5px;
+  margin: 15px;
 }
 
 .gallery-row {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
 }
 
-.ilongot {
+.igorot {
   text-align: center;
   background-color: gray;
 }
 
-.ilongot .general-padding {
+.igorot .general-padding {
   padding-bottom: 1.5%;
 }
 
-.ilongot-img {
+.igorot-img {
   width: 100%;
   height: 350px;
 }
 
+.palawan-intro {
+  text-align: center;
+  padding-bottom: .75%;
+}
+
+.palawan-container {
+  padding-top: .75%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 /* Quiz Page Styles */
 /* These are styles found on the quiz page */

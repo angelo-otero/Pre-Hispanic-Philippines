@@ -1,36 +1,58 @@
 //jshint esversion:6
 
 $(document).ready(() => {
-  const highlandImage = $('.highland-people-img');
-  const highlandGallery = $('.highland-people-gallery');
-  const highlandButton = $('.highland-button');
-  const highlandInfo = $('.highland-group-info');
-  const highlandThumbnail = $('.img-thumbnail');
+  const aetaImage = $('#aetaImg');
+  const aetaButton = $('#aetaButton');
+  const aetaGallery = $('#Aeta .highland-people-gallery');
+  const aetaInfo = $('#Aeta .highland-group-info');
+  const ilongotImage = $('#ilongotImg');
+  const ilongotButton = $('#ilongotButton');
+  const ilongotGallery = $('#Ilongot .highland-people-gallery');
+  const ilongotInfo = $('#Ilongot .highland-group-info');
+  const highlandThumbnail = $('.highland-people-gallery img');
 
-  highlandGallery.hide();
+  $('.highland-people-gallery').hide();
 
-  highlandButton.on('click', () => {
-    if (highlandButton.text() === 'View Gallery') {
-      highlandInfo.hide();
-      highlandGallery.show();
-      highlandButton.text('View Info');
+  aetaButton.on('click', function() {
+    if (aetaButton.text() === 'View Gallery') {
+      aetaInfo.fadeOut(1000);
+      aetaGallery.fadeIn(1000);
+      aetaButton.text('View Info');
     } else {
-      highlandInfo.show();
-      highlandGallery.hide();
-      highlandButton.text('View Gallery');
+      aetaInfo.fadeIn(1000);
+      aetaGallery.fadeOut(1000);
+      aetaButton.text('View Gallery');
     }
   });
 
-  highlandThumbnail.on('mouseenter', ()=>{
+  ilongotButton.on('click', function() {
+    if (ilongotButton.text() === 'View Gallery') {
+      ilongotInfo.fadeOut(1000);
+      ilongotGallery.fadeIn(1000);
+      ilongotButton.text('View Info');
+    } else {
+      ilongotInfo.fadeIn(1000);
+      ilongotGallery.fadeOut(1000);
+      ilongotButton.text('View Gallery');
+    }
+  });
+
+  highlandThumbnail.on('mouseenter', () => {
     highlandThumbnail.css({
       'cursor': 'pointer'
     });
   });
 
-  highlandThumbnail.on('click', ()=>{
-    highlandImage.attr({
-      'src': 'Images/coastal-area.jpeg'
-    });
+  highlandThumbnail.on('click', function() {
+    var imgSrc = $(this).attr('src');
+    if ($(this).parent().attr('id', 'AetaGallery')) {
+      aetaImage.attr('src', imgSrc);
+      console.log('aeta');
+    }
+    if ($(this).parent().attr('id', 'IlongotGallery')) {
+      ilongotImage.attr('src', imgSrc);
+      console.log('ilongot');
+    }
   });
 
 });
