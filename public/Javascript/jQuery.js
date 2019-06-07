@@ -5,11 +5,14 @@ $(document).ready(() => {
   const aetaButton = $('#aetaButton');
   const aetaGallery = $('#Aeta .highland-people-gallery');
   const aetaInfo = $('#Aeta .highland-group-info');
+  const aetaThumbnail = $('#AetaGallery img');
   const ilongotImage = $('#ilongotImg');
   const ilongotButton = $('#ilongotButton');
   const ilongotGallery = $('#Ilongot .highland-people-gallery');
   const ilongotInfo = $('#Ilongot .highland-group-info');
-  const highlandThumbnail = $('.highland-people-gallery img');
+  const ilongotThumbnail = $('#IlongotGallery img');
+  const highlandThumbnail = $('.img-thumbnail');
+
 
   $('.highland-people-gallery').hide();
 
@@ -43,16 +46,20 @@ $(document).ready(() => {
     });
   });
 
-  highlandThumbnail.on('click', function() {
-    var imgSrc = $(this).attr('src');
-    if ($(this).parent().attr('id', 'AetaGallery')) {
-      aetaImage.attr('src', imgSrc);
-      console.log('aeta');
-    }
-    if ($(this).parent().attr('id', 'IlongotGallery')) {
-      ilongotImage.attr('src', imgSrc);
-      console.log('ilongot');
-    }
+  aetaThumbnail.on('click', function() {
+    const imgSrc = $(this).attr('src');
+    aetaImage.fadeOut(1000, function() {
+      aetaImage.attr('src', imgSrc).fadeIn(1000);
+    });
+    console.log('aeta');
+  });
+
+  ilongotThumbnail.on('click', function() {
+    const imgSrc = $(this).attr('src');
+    ilongotImage.fadeOut(1000, function() {
+      ilongotImage.attr('src', imgSrc).fadeIn(1000);
+    });
+    console.log('Ilongot');
   });
 
 });
