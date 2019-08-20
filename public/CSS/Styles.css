@@ -1,7 +1,18 @@
+/* colors */
+#2d3436
+#636e72
+#b2bec3
+#ffffff
+#0984e3
+#fdcb6e
+#d63031
+
 /* General Styles*/
 /*These are styles found on all the pages */
 body {
   font-size: 18px;
+  color: #2d3436;
+  background-color: #ffffff;
 }
 
 /* Typgraphy */
@@ -13,9 +24,24 @@ p, a, li {
   font-family: 'Roboto', sans-serif;
 }
 
+a {
+  color: #0984e3;
+}
+
+a:hover {
+  color: #fdcb6e;
+}
+
 /* Bootstrap Styles */
 .btn {
   box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+  background-color: #0984e3;
+  color: #ffffff;
+}
+
+.btn:hover {
+  background-color: #fdcb6e;
+  color: #2d3436;
 }
 
 .card {
@@ -26,9 +52,14 @@ p, a, li {
   height: 200px;
 }
 
-.carousel-icons {
-  background-color: gray;
-  padding: 20px;
+.carousel-control-next:hover {
+  background-color: #0984e3;
+  background-color: rgba(9, 132, 227, .5);
+}
+
+.carousel-control-prev:hover {
+  background-color: #0984e3;
+  background-color: rgba(9, 132, 227, .5);
 }
 
 .general-padding {
@@ -39,9 +70,14 @@ p, a, li {
   width: 55%;
   padding: 5%;
   padding-left: 10%;
+  color: #ffffff;
 }
 
 /* Header Styles */
+.navbar {
+  background-color: #2d3436;
+}
+
  .navbar-collapse {
   display: flex;
   flex-direction: column;
@@ -59,6 +95,7 @@ p, a, li {
 .logo {
   display: flex;
   flex-direction: column;
+  color: #fdcb6e;
 }
 
 .logo img{
@@ -68,18 +105,33 @@ p, a, li {
   margin: 0 auto;
 }
 
+.nav-link {
+  color: #b2bec3;
+}
 
 /* Footer Styles */
 footer {
   font-size: .85rem;
-  background-color: gray;
+  background-color: #2d3436;
   display: flex;
   justify-content: space-between;
   padding: 1% 10%;
 }
 
+.copyright {
+  color: #fdcb6e;
+}
+
 .links {
   width: 16%;
+}
+
+.links a {
+  color: #b2bec3;
+}
+
+.links a:hover {
+  color: #fdcb6e;
 }
 
 footer ul {
@@ -106,7 +158,7 @@ footer ul {
 /* Home Page Styles */
 /* These are styles found on the home page */
 .hero-landing {
-  background-image: url("../Images/landing-image.jpeg");
+  background-image: url("../Images/IndexLanding.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,7 +167,8 @@ footer ul {
 }
 
 .basic-info {
-  background-color: gray;
+  background-color: #636e72;
+  color: #ffffff;
 }
 
 .introduction {
@@ -144,6 +197,7 @@ footer ul {
 
 .residences {
   padding: 3% 25%;
+  background-color: #b2bec3;
 }
 
 .residences h2 {
@@ -157,14 +211,22 @@ footer ul {
   margin: 5%;
 }
 
-.card-highland p{
-  height: 108px;
+/* .residences-cards .card-body {
+  background-color: #b2bec3;
+} */
+
+.residences-cards p{
+  height: 95px;
 }
 
 
 
 /* Lowland Page Styles */
 /* These are styles found on the lowland page */
+#lowland-hero{
+  background-image: url("../Images/LowlandLanding.jpg");
+}
+
 .region-name {
   text-align: center;
   margin-bottom: 20px;
@@ -199,10 +261,16 @@ footer ul {
   margin: 0 0 15px 15px;
 }
 
-
+#Visayas {
+  background-color: #b2bec3;
+}
 
 /* Highland Page Styles */
 /* These are styles found on the highland page */
+#highland-hero{
+  background-image: url("../Images/HighlandLanding.jpg");
+}
+
 .highland-people {
   width: 100%;
   display: flex;
@@ -225,13 +293,13 @@ footer ul {
 .highland-button {
   position: relative;
   width: 150px;
-  top: 83%;
+  top: 65%;
   left: 20%;
 }
 
 .img-thumbnail {
-  width: 150px;
-  height: 150px;
+  width: 148.4px;
+  height: 100px;
   margin: 15px;
 }
 
@@ -246,7 +314,8 @@ footer ul {
 
 .igorot {
   text-align: center;
-  background-color: gray;
+  background-color: #636e72;
+  color: #ffffff;
 }
 
 .igorot-description {
@@ -259,7 +328,11 @@ footer ul {
 
 .igorot-img {
   width: 100%;
-  height: 350px;
+  height: 450px;
+}
+
+.palawan {
+  background-color: #b2bec3;
 }
 
 .palawan-intro {
@@ -296,7 +369,7 @@ footer ul {
 }
 
 .my-photo {
-  background-image: url("../Images/coastal-area.jpeg");
+  background-image: url("../Images/Me.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -352,8 +425,6 @@ footer ul {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.videos h3 {
-  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
 }
