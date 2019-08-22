@@ -22,6 +22,10 @@ $(document).ready(() => {
   $('.highland-people-gallery').hide();
   imgCaption.hide();
 
+  $(function () {
+  $('[data-toggle="popover"]').popover();
+});
+
   imgContainer.on('mouseenter', function() {
     imgCaption.fadeIn(500);
     img.css({'opacity': '.3', 'cursor': 'pointer', 'transform': 'scale(1.2)'});
