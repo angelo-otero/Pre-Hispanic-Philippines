@@ -1,6 +1,11 @@
 //jshint esversion:6
 
 $(document).ready(() => {
+  const img = $('.img');
+  const imgContainer = $('.img-container');
+  const imgCaption = $('.img-caption');
+
+  // highland variables
   const aetaImage = $('#aetaImg');
   const aetaButton = $('#aetaButton');
   const aetaGallery = $('#Aeta .highland-people-gallery');
@@ -15,6 +20,19 @@ $(document).ready(() => {
 
 
   $('.highland-people-gallery').hide();
+  imgCaption.hide();
+
+  imgContainer.on('mouseenter', function() {
+    imgCaption.fadeIn(500);
+    img.css({'opacity': '.3', 'cursor': 'pointer', 'transform': 'scale(1.2)'});
+  }).on('mouseleave', function(){
+    imgCaption.fadeOut(500);
+    img.css({'opacity': '1', 'cursor': 'default', 'transform': 'scale(1)'});
+  });
+
+  imgCaption.on('mouseenter', function() {
+    img.css({'opacity': '.3', 'transform': 'scale(1.2)'});
+  });
 
   aetaButton.on('click', function() {
     if (aetaButton.text() === 'View Gallery') {
