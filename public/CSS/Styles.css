@@ -1,4 +1,5 @@
 /* colors */
+#2d3436
 #636e72
 #b2bec3
 #ffffff
@@ -33,8 +34,19 @@ a:hover {
 
 .italicized {
   font-style: italic;
-  background-color: #2d3436;
-  color: #d63031;
+  color: #b2bec3;
+}
+
+#Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
+  color: #636e72;
+}
+
+.info-pop {
+  text-decoration: underline;
+}
+
+.info-pop:hover {
+  cursor: pointer;
 }
 
 /* Images */
