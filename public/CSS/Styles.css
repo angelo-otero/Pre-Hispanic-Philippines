@@ -1,5 +1,4 @@
 /* colors */
-#2d3436
 #636e72
 #b2bec3
 #ffffff
@@ -34,6 +33,8 @@ a:hover {
 
 .italicized {
   font-style: italic;
+  background-color: #2d3436;
+  color: #d63031;
 }
 
 /* Images */
@@ -43,7 +44,7 @@ a:hover {
 }
 
 .img-caption {
-  color: red;
+  color: #ffffff;
   text-align: center;
   position: absolute;
   top: 50%;
@@ -62,6 +63,8 @@ a:hover {
 
 .img-container {
   background-color: #0984e3;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Bootstrap Styles */
@@ -194,12 +197,13 @@ footer ul {
 /* Home Page Styles */
 /* These are styles found on the home page */
 .hero-landing {
-  background-image: url("../Images/IndexLanding.jpg");
+  background: linear-gradient(rgba(9,132,227, .5), rgba(9,132,227, .5)) ,url("../Images/IndexLanding.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
   height: 500px;
+  position: relative;
 }
 
 .basic-info {
@@ -281,7 +285,7 @@ footer ul {
 /* Lowland Page Styles */
 /* These are styles found on the lowland page */
 #lowland-hero{
-  background-image: url("../Images/LowlandLanding.jpg");
+  background: linear-gradient(rgba(9,132,227, .5), rgba(9,132,227, .5)), url("../Images/LowlandLanding.jpg");
 }
 
 .region-name {
@@ -325,7 +329,7 @@ footer ul {
 /* Highland Page Styles */
 /* These are styles found on the highland page */
 #highland-hero{
-  background-image: url("../Images/HighlandLanding.jpg");
+  background: linear-gradient(rgba(9,132,227, .5), rgba(9,132,227, .5)), url("../Images/HighlandLanding.jpg");
 }
 
 .highland-people {
