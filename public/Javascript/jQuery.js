@@ -159,4 +159,39 @@ $(document).ready(() => {
     }
   });
 
+
+  // changes the src, alt, title and footer of
+  // the image modal based on image clicked
+  imgContainer.on('click', function() {
+    // variables for getting the clicked image's src, alt and caption
+    const imgSrc = $(this).find('.img').attr('src');
+    const imgAlt = $(this).find('.img').attr('alt');
+    const imgTitle = $(this).find('h4').text();
+    const imgCredits = $(this).find('p').html();
+    // variables for setting the modal image, title and footer
+    let modalImage = $('#modal-image');
+    let modalTitle = $('#image-modal-title');
+    let modalFooter = $('.modal-footer').find('p');
+
+    // changes the modal title, alt and footer
+    modalTitle.text(imgTitle);
+    modalFooter.html(imgCredits);
+    modalImage.attr('alt', imgAlt);
+
+    // changes the modal image src based on image clicked
+    switch (imgSrc) {
+      // index page cases 
+      case 'Images/PreHistory.jpg':
+        modalImage.attr('src', 'Images/PreHistory_full.jpeg');
+        break;
+      case 'Images/Lowland.jpg':
+        modalImage.attr('src', 'Images/Lowland_full.jpeg');
+        break;
+      default:
+
+    }
+
+  });
+
+
 });
