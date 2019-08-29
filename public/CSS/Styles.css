@@ -37,7 +37,7 @@ a:hover {
   color: #b2bec3;
 }
 
-#Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
+#Visayas .italicized, #Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
   color: #636e72;
 }
 
@@ -62,6 +62,10 @@ a:hover {
   top: 50%;
   left:50%;
   transform: translate(-50%, -50%);
+}
+
+.img-caption:hover {
+  cursor: pointer;
 }
 
 .img-caption a {

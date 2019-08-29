@@ -53,8 +53,7 @@ $(document).ready(() => {
   imgCaption.on('mouseenter', function() {
     $(this).find(img).css({
       'opacity': '.3',
-      'transform': 'scale(1.2)',
-      'cursor': 'pointer'
+      'transform': 'scale(1.2)'
     });
   });
 
