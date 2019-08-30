@@ -104,18 +104,15 @@ $(document).ready(() => {
   // based on the image thumbnail clicked
   aetaThumbnail.on('click', function() {
     const imgSrc = $(this).attr('src');
-    const thumbAlt = $(this).attr('alt');
     let aetaTitle = $('.aeta-title');
     let aetaSource = $('.aeta-source');
-    let aetaAlt = $('#aetaImg').attr('alt');
 
     aetaImage.fadeOut(1000, function() {
       aetaImage.attr('src', imgSrc).fadeIn(1000);
     });
 
+    // changes the alt to match the clicked thumbnail's alt
     $('#aetaImg').attr('alt', thumbAlt);
-
-
 
     // changes the image caption based
     // on the src of thumbnail clicked
@@ -135,7 +132,6 @@ $(document).ready(() => {
       default:
         aetaTitle.text('Aeta Women and their Children ca. 1890 - ca. 1923');
         aetaSource.text('PD-US-Expired');
-
     }
   });
 
@@ -143,12 +139,17 @@ $(document).ready(() => {
   // based on the image thumbnail clicked
   ilongotThumbnail.on('click', function() {
     const imgSrc = $(this).attr('src');
+    const thumbAlt = $(this).attr('alt');
     let ilongotTitle = $('.ilongot-title');
     let ilongotSource = $('.ilongot-source');
 
     ilongotImage.fadeOut(1000, function() {
       ilongotImage.attr('src', imgSrc).fadeIn(1000);
     });
+
+    // changes the alt to match the clicked thumbnail's alt
+    $('#ilongotImg').attr('alt', thumbAlt);
+
     // changes the image caption based
     // on the src of thumbnail clicked
     switch (imgSrc) {
