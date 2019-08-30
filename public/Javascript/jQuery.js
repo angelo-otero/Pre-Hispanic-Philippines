@@ -19,6 +19,8 @@ $(document).ready(() => {
   const ilongotThumbnail = $('#IlongotGallery img');
   const highlandThumbnail = $('.img-thumbnail');
 
+  const regionName = $('.region-name').find('h1');
+
   // hides gallery for Aeta and Ilongot groups
   $('.highland-people-gallery').hide();
   // hides the caption for all images
@@ -97,11 +99,16 @@ $(document).ready(() => {
   // based on the image thumbnail clicked
   aetaThumbnail.on('click', function() {
     const imgSrc = $(this).attr('src');
+    const thumbAlt = $(this).attr('src');
     let aetaTitle = $('.aeta-title');
     let aetaSource = $('.aeta-source');
+
     aetaImage.fadeOut(1000, function() {
       aetaImage.attr('src', imgSrc).fadeIn(1000);
     });
+
+    console.log(aetaImg.attr('alt'));
+
     // changes the image caption based
     // on the src of thumbnail clicked
     switch (imgSrc) {
@@ -132,6 +139,7 @@ $(document).ready(() => {
     const imgSrc = $(this).attr('src');
     let ilongotTitle = $('.ilongot-title');
     let ilongotSource = $('.ilongot-source');
+
     ilongotImage.fadeOut(1000, function() {
       ilongotImage.attr('src', imgSrc).fadeIn(1000);
     });
@@ -162,6 +170,7 @@ $(document).ready(() => {
 
   // changes the src, alt, title and footer of
   // the image modal based on image clicked
+  // so the full, uncropped image can be displayed
   imgContainer.on('click', function() {
     // variables for getting the clicked image's src, alt and caption
     const imgSrc = $(this).find('.img').attr('src');
@@ -180,18 +189,42 @@ $(document).ready(() => {
 
     // changes the modal image src based on image clicked
     switch (imgSrc) {
-      // index page cases 
+      // cases for full sized images with jpeg file type
       case 'Images/PreHistory.jpg':
         modalImage.attr('src', 'Images/PreHistory_full.jpeg');
+        break;
+      case 'Images/LCI.jpg':
+        modalImage.attr('src', 'Images/LCI_full.jpeg');
+        break;
+      case 'Images/ColonialMoraga.jpg':
+        modalImage.attr('src', 'Images/ColonialMoraga_full.jpeg');
         break;
       case 'Images/Lowland.jpg':
         modalImage.attr('src', 'Images/Lowland_full.jpeg');
         break;
+      case 'Images/Highland.jpg':
+        modalImage.attr('src', 'Images/Highland_full.jpeg');
+        break;
       default:
-
+      // if image clicked is none of the above, subtracts the last four
+      // letters of the file (.jpg) and replaces it with '_full.jpg'
+      // so the full image is displayed
+      modalImage.attr('src', imgSrc.slice(0, -4) + '_full.jpg');
     }
 
   });
 
+  // changes modal image based on region name clicked
+  regionName.on('click', function(){
+    const regionNameText = $(this).find(regionName).text();
+    console.log(regionNameText);
+    switch (regionName) {
+      case 'Luzon':
+        modalImage.attr('src', 'Images/Luzon.jpg');
+        break;
+      default:
+
+    }
+  });
 
 });

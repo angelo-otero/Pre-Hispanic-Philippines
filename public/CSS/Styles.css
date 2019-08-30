@@ -37,10 +37,6 @@ a:hover {
   color: #b2bec3;
 }
 
-#Visayas .italicized, #Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
-  color: #636e72;
-}
-
 .info-pop {
   text-decoration: underline;
 }
@@ -345,6 +341,21 @@ footer ul {
 
 #Visayas {
   background-color: #b2bec3;
+}
+
+#Visayas .italicized, #Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
+  color: #636e72;
+}
+
+.region-name h1 {
+  text-decoration: underline;
+  font-style: italic;
+  color: #636e72
+}
+
+.region-name h1:hover {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Highland Page Styles */
