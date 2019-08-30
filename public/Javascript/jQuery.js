@@ -21,6 +21,11 @@ $(document).ready(() => {
 
   const regionName = $('.region-name').find('h1');
 
+  // variables for setting the modal image, title and footer
+  let modalImage = $('#modal-image');
+  let modalTitle = $('#image-modal-title');
+  let modalFooter = $('.modal-footer').find('p');
+
   // hides gallery for Aeta and Ilongot groups
   $('.highland-people-gallery').hide();
   // hides the caption for all images
@@ -99,23 +104,22 @@ $(document).ready(() => {
   // based on the image thumbnail clicked
   aetaThumbnail.on('click', function() {
     const imgSrc = $(this).attr('src');
-    const thumbAlt = $(this).attr('src');
+    const thumbAlt = $(this).attr('alt');
     let aetaTitle = $('.aeta-title');
     let aetaSource = $('.aeta-source');
+    let aetaAlt = $('#aetaImg').attr('alt');
 
     aetaImage.fadeOut(1000, function() {
       aetaImage.attr('src', imgSrc).fadeIn(1000);
     });
 
-    console.log(aetaImg.attr('alt'));
+    $('#aetaImg').attr('alt', thumbAlt);
+
+
 
     // changes the image caption based
     // on the src of thumbnail clicked
     switch (imgSrc) {
-      case 'Images/Aeta1.jpg':
-        aetaTitle.text('Aeta Women and their Children ca. 1890 - ca. 1923');
-        aetaSource.text('PD-US-Expired');
-        break;
       case 'Images/Aeta2.jpg':
         aetaTitle.text('Aeta Group 1902');
         aetaSource.text('PD-US-Expired');
@@ -129,6 +133,8 @@ $(document).ready(() => {
         aetaSource.text('PD-US-Expired');
         break;
       default:
+        aetaTitle.text('Aeta Women and their Children ca. 1890 - ca. 1923');
+        aetaSource.text('PD-US-Expired');
 
     }
   });
@@ -146,10 +152,6 @@ $(document).ready(() => {
     // changes the image caption based
     // on the src of thumbnail clicked
     switch (imgSrc) {
-      case 'Images/Ilongot1.jpg':
-        ilongotTitle.text('Ilongot Hunting Party 1910');
-        ilongotSource.text('PD-US-Expired');
-        break;
       case 'Images/Ilongot2.jpg':
         ilongotTitle.text('Ilongot Rice Farmers 1910');
         ilongotSource.text('PD-US-Expired');
@@ -163,6 +165,8 @@ $(document).ready(() => {
         ilongotSource.text('PD-US-Expired');
         break;
       default:
+        ilongotTitle.text('Ilongot Hunting Party 1910');
+        ilongotSource.text('PD-US-Expired');
 
     }
   });
@@ -177,10 +181,6 @@ $(document).ready(() => {
     const imgAlt = $(this).find('.img').attr('alt');
     const imgTitle = $(this).find('h4').text();
     const imgCredits = $(this).find('p').html();
-    // variables for setting the modal image, title and footer
-    let modalImage = $('#modal-image');
-    let modalTitle = $('#image-modal-title');
-    let modalFooter = $('.modal-footer').find('p');
 
     // changes the modal title, alt and footer
     modalTitle.text(imgTitle);
@@ -206,21 +206,33 @@ $(document).ready(() => {
         modalImage.attr('src', 'Images/Highland_full.jpeg');
         break;
       default:
-      // if image clicked is none of the above, subtracts the last four
-      // letters of the file (.jpg) and replaces it with '_full.jpg'
-      // so the full image is displayed
-      modalImage.attr('src', imgSrc.slice(0, -4) + '_full.jpg');
+        // if image clicked is none of the above, subtracts the last four
+        // letters of the file (.jpg) and replaces it with '_full.jpg'
+        // so the full image is displayed
+        modalImage.attr('src', imgSrc.slice(0, -4) + '_full.jpg');
     }
 
   });
 
   // changes modal image based on region name clicked
-  regionName.on('click', function(){
-    const regionNameText = $(this).find(regionName).text();
+  regionName.on('click', function() {
+    const regionNameText = $(this).text();
     console.log(regionNameText);
-    switch (regionName) {
+    switch (regionNameText) {
       case 'Luzon':
         modalImage.attr('src', 'Images/Luzon.jpg');
+        modalTitle.text('Luzon');
+        modalFooter.html('<p>Photo by: <a href="https://commons.wikimedia.org/wiki/File:Luzon_Island_Red.png" target="_blank">JL 09</a></p>');
+        break;
+      case 'Visayas':
+        modalImage.attr('src', 'Images/Visayas.jpg');
+        modalTitle.text('Visayas');
+        modalFooter.html('<p>Photo by: <a href="https://commons.wikimedia.org/wiki/File:Visayas_Red.png" target="_blank">JL 09</a></p>');
+        break;
+      case 'Mindanao':
+        modalImage.attr('src', 'Images/Mindanao.jpg');
+        modalTitle.text('Mindanao');
+        modalFooter.html('<p>Photo by: <a href="https://commons.wikimedia.org/wiki/File:Mindanao_Red.png" target="_blank">JL 09</a></p>');
         break;
       default:
 
