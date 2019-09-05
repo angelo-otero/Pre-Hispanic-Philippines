@@ -453,7 +453,27 @@ footer ul {
 
 /* Quiz Page Styles */
 /* These are styles found on the quiz page */
+.quiz {
+  height: 75vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
 
+.question-and-answer {
+  margin: 0 auto;
+  width: 65%;
+  height: 60%;
+}
+
+.submit-answer {
+  width: 20%;
+  position: relative;
+  left: 80%;
+  top: 75%;
+  margin-top: 5%;
+}
 
 /* About Page Styles */
 /* These are styles found on the about page */

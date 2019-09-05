@@ -16,13 +16,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-// const quiz = new vue({
-//   el: '#quiz',
-//   data: {
-//
-//   }
-// });
-
 app.get("/", function(req, res) {
   res.render("index");
 });

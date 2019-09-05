@@ -21,6 +21,11 @@ $(document).ready(() => {
 
   const regionName = $('.region-name').find('h1');
 
+  // quiz variables
+  let question = $('.question');
+  let answers = $('.answers');
+  const submitAnswerBtn = $('.submit-answer');
+
   // variables for setting the modal image, title and footer
   let modalImage = $('#modal-image');
   let modalTitle = $('#image-modal-title');
@@ -104,11 +109,12 @@ $(document).ready(() => {
   // based on the image thumbnail clicked
   aetaThumbnail.on('click', function() {
     const imgSrc = $(this).attr('src');
+    const thumbAlt = $(this).attr('alt');
     let aetaTitle = $('.aeta-title');
     let aetaSource = $('.aeta-source');
 
-    aetaImage.fadeOut(1000, function() {
-      aetaImage.attr('src', imgSrc).fadeIn(1000);
+    aetaImage.fadeOut(250, function() {
+      aetaImage.attr('src', imgSrc).fadeIn(250);
     });
 
     // changes the alt to match the clicked thumbnail's alt
@@ -117,6 +123,8 @@ $(document).ready(() => {
     // changes the image caption based
     // on the src of thumbnail clicked
     switch (imgSrc) {
+      case 'Images/Aeta1.jpg':
+      break;
       case 'Images/Aeta2.jpg':
         aetaTitle.text('Aeta Group 1902');
         aetaSource.text('PD-US-Expired');
@@ -143,8 +151,8 @@ $(document).ready(() => {
     let ilongotTitle = $('.ilongot-title');
     let ilongotSource = $('.ilongot-source');
 
-    ilongotImage.fadeOut(1000, function() {
-      ilongotImage.attr('src', imgSrc).fadeIn(1000);
+    ilongotImage.fadeOut(250, function() {
+      ilongotImage.attr('src', imgSrc).fadeIn(250);
     });
 
     // changes the alt to match the clicked thumbnail's alt
@@ -239,5 +247,25 @@ $(document).ready(() => {
 
     }
   });
+
+  // testing quiz mechanics
+  function randomQuestionGenerator () {
+    let questionAndAnswer = [{question: 'what?', answer: 'yes'}, {question: 'why', answer: 'no'}, {question: 'when', answer: 'maybe'}, {question: 'how', answer: 'for sure'}];
+    let i = Math.floor(Math.random() * questionAndAnswer.length);
+    return questionAndAnswer[i].answer;
+  }
+
+submitAnswerBtn.on('click', function (){
+  if (submitAnswerBtn.text() === 'Begin Quiz') {
+    let randomQuestion = randomQuestionGenerator();
+    question.html('<p>' + randomQuestion + '</p>');
+    submitAnswerBtn.text('Submit Answer');
+  } else {
+    question.html('<h1>Happy day!</h1>');
+    submitAnswerBtn.text('Begin Quiz');
+  }
+
+});
+
 
 });
