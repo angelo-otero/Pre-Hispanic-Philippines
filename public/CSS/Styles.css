@@ -467,6 +467,10 @@ footer ul {
   height: 60%;
 }
 
+.choices {
+  margin-top: 20px;
+}
+
 .submit-answer {
   width: 20%;
   position: relative;

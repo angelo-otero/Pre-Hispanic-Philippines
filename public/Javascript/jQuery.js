@@ -23,7 +23,7 @@ $(document).ready(() => {
 
   // quiz variables
   let question = $('.question');
-  let answers = $('.answers');
+  let choices = $('.choices');
   const submitAnswerBtn = $('.submit-answer');
 
   // variables for setting the modal image, title and footer
@@ -124,7 +124,7 @@ $(document).ready(() => {
     // on the src of thumbnail clicked
     switch (imgSrc) {
       case 'Images/Aeta1.jpg':
-      break;
+        break;
       case 'Images/Aeta2.jpg':
         aetaTitle.text('Aeta Group 1902');
         aetaSource.text('PD-US-Expired');
@@ -248,24 +248,100 @@ $(document).ready(() => {
     }
   });
 
+
   // testing quiz mechanics
-  function randomQuestionGenerator () {
-    let questionAndAnswer = [{question: 'what?', answer: 'yes'}, {question: 'why', answer: 'no'}, {question: 'when', answer: 'maybe'}, {question: 'how', answer: 'for sure'}];
-    let i = Math.floor(Math.random() * questionAndAnswer.length);
-    return questionAndAnswer[i].answer;
-  }
+  //array containing questions and their choices
+  const questionAndChoices = [{
+    question: 'About how many Filipino ethnolinguistic groups currently exist?',
+    choices: `<input type='radio' name='ethnolinguistic-number' value='a'> 1<br>
+      <input type='radio' name='ethnolinguistic-number' value='b'> 365<br>
+      <input type='radio' name='ethnolinguistic-number' value='c'> 175<br>
+      <input type='radio' name='ethnolinguistic-number' value='d'> 25`
+  }, {
+    question: 'What are the three major regions of the Philippines?',
+    choices: `<input type='checkbox' name='regions' value='a'> Mindoro<br>
+      <input type='checkbox' name='regions' value='b'> Luzon<br>
+      <input type='checkbox' name='regions' value='c'> Srivijaya<br>
+      <input type='checkbox' name='regions' value='d'> Mindanao<br>
+      <input type='checkbox' name='regions' value='e'> Visayas`
+  }, {
+    question: 'Who led the first Spanish expedition to the Philippines?',
+    choices: `<input type='radio' name='conquistador' value='a'> Karimul Makhdum<br>
+      <input type='radio' name='conquistador' value='b'> Zheng He<br>
+      <input type='radio' name='conquistador' value='c'> Ferdinand Magellan<br>
+      <input type='radio' name='conquistador' value='d'> Miguel Lopez de Legazpi`
+  }, {
+    question: 'Which Filipino ethnolinguistic group is the most well-known?',
+    choices: `<input type='radio' name='famous-group' value='a'> T'boli<br>
+      <input type='radio' name='famous-group' value='b'> Tagalog<br>
+      <input type='radio' name='famous-group' value='c'> Tutsi<br>
+      <input type='radio' name='famous-group' value='d'> Uyghurs`
+  }, {
+    question: 'The Philippines is a(n):',
+    choices: `<input type='radio' name='land-type' value='a'> peninsula or land mostly surrounded by water <br>
+      <input type='radio' name='land-type' value='b'> isthmus or narrow land connecting two larger areas across water<br>
+      <input type='radio' name='land-type' value='c'> fjord or long, narrow inlet with steep sides or cliffs<br>
+      <input type='radio' name='land-type' value='d'> archipelago or group of islands`
+  }, {
+    question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
+    choices: `<input type='radio' name='UNESCO' value='a'> Borubudur Temple Compounds<br>
+      <input type='radio' name='UNESCO' value='b'> Rice Terraces of Philippine Cordilleras<br>
+      <input type='radio' name='UNESCO' value='c'> Plaza Moraga<br>
+      <input type='radio' name='UNESCO' value='d'> Banaue Rice Terraces`
+  }, {
+    question: 'Which Filipino groups resisted Spanish expansion the longest?',
+    choices: `<input type='checkbox' name='resist' value='a'> Mestizos<br>
+      <input type='checkbox' name='resist' value='b'> Highlanders<br>
+      <input type='checkbox' name='resist' value='c'> Muslim Sultanates<br>
+      <input type='checkbox' name='resist' value='d'> Lowlanders`
+  }, {
+    question: 'How long did the Spanish Colonial Era last?',
+    choices: `<input type='radio' name='colonial-era' value='a'> 1000 years<br>
+      <input type='radio' name='colonial-era' value='b'> 333 years<br>
+      <input type='radio' name='colonial-era' value='c'> 42 days<br>
+      <input type='radio' name='colonial-era' value='d'> 12 weeks`
+  }, {
+    question: 'The Laguna Copperplate Inscription is important because:',
+    choices: `<input type='checkbox' name='LCI' value='a'> it's the earliest written record found in the Philippines<br>
+      <input type='checkbox' name='LCI' value='b'>it's written by Jose Rizal <br>
+      <input type='checkbox' name='LCI' value='c'> it proves the existence of ancient aliens<br>
+      <input type='checkbox' name='LCI' value='d'> it provides evidence of cultural exchange due to different languages used<br>
+      <input type='checkbox' name='LCI' value='e'> it shows the wealth of the Javanese empire`
+  }, {
+    question: 'Who is credited for bringing Islam to the Philippines?',
+    choices: `<input type='radio' name='islam' value='a'>An-Nasir Salah ad-Din Yusuf ibn Ayyub <br>
+      <input type='radio' name='islam' value='b'> Abdul Alhazred<br>
+      <input type='radio' name='islam' value='c'> Karimul Makhdum<br>
+      <input type='radio' name='islam' value='d'> Muhammad Ali`
+  }];
+  let questionNumber = 1;
 
-submitAnswerBtn.on('click', function (){
-  if (submitAnswerBtn.text() === 'Begin Quiz') {
-    let randomQuestion = randomQuestionGenerator();
-    question.html('<p>' + randomQuestion + '</p>');
-    submitAnswerBtn.text('Submit Answer');
-  } else {
-    question.html('<h1>Happy day!</h1>');
-    submitAnswerBtn.text('Begin Quiz');
-  }
+  submitAnswerBtn.on('click', function() {
+    //randomly generate an integer between 0 and length of the array
+    let i = Math.floor(Math.random() * questionAndChoices.length);
 
-});
+    //checks if the button text is Begin Quiz and changes it to Submit Answer
+    if (submitAnswerBtn.text() === 'Begin Quiz') {
+      submitAnswerBtn.text('Submit Answer');
+    }
+    //checks to see if array is empty
+    //if not empty, randomly choose and render a question and choices object
+    //then remove that object from the array
+    if (!questionAndChoices || !questionAndChoices.length) {
+      question.html("<h1>You've finished!</h1>");
+      choices.html("");
+    } else {
+      let randomQuestion = questionAndChoices[i].question;
+      let randomChoices = questionAndChoices[i].choices;
+      question.html('<h3>Question ' + questionNumber + ' of 10</h3><br><h2>' + randomQuestion + '</h2>');
+      choices.html(randomChoices);
+      questionAndChoices.splice(i, 1);
+      questionNumber++;
+      console.log(i);
+      console.log(questionAndChoices);
+      console.log(questionAndChoices.length);
+    }
+  });
 
 
 });
