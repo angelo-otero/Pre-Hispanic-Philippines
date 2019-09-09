@@ -475,8 +475,25 @@ footer ul {
   width: 20%;
   position: relative;
   left: 80%;
-  top: 75%;
   margin-top: 5%;
+}
+
+.feedback {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 50vh;
+  color: #ffffff;
+  background-color: gray;
+  border: 5px solid black;
+}
+
+.feedback-body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 20%;
 }
 
 /* About Page Styles */

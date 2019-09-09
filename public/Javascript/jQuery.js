@@ -6,6 +6,9 @@ $(document).ready(() => {
   const imgContainer = $('.img-container');
   const imgCaption = $('.img-caption');
 
+  // lowland variables
+  const regionName = $('.region-name').find('h1');
+
   // highland variables
   const aetaImage = $('#aetaImg');
   const aetaButton = $('#aetaButton');
@@ -19,12 +22,16 @@ $(document).ready(() => {
   const ilongotThumbnail = $('#IlongotGallery img');
   const highlandThumbnail = $('.img-thumbnail');
 
-  const regionName = $('.region-name').find('h1');
-
   // quiz variables
   let question = $('.question');
-  let choices = $('.choices');
+  let choices = $('#choices');
   const submitAnswerBtn = $('.submit-answer');
+  let questionNumber = 1;
+  let answerScore = 0;
+  const people = $('.people');
+  const feedback = $('.feedback');
+  const feedbackHeader = $("#feedback-header");
+  const feedbackText = $("#feedback-text");
 
   // variables for setting the modal image, title and footer
   let modalImage = $('#modal-image');
@@ -35,6 +42,7 @@ $(document).ready(() => {
   $('.highland-people-gallery').hide();
   // hides the caption for all images
   imgCaption.hide();
+  feedback.hide();
 
   // initialize popovers in bootstrap
   $(function() {
@@ -253,68 +261,67 @@ $(document).ready(() => {
   //array containing questions and their choices
   const questionAndChoices = [{
     question: 'About how many Filipino ethnolinguistic groups currently exist?',
-    choices: `<input type='radio' name='ethnolinguistic-number' value='a'> 1<br>
-      <input type='radio' name='ethnolinguistic-number' value='b'> 365<br>
-      <input type='radio' name='ethnolinguistic-number' value='c'> 175<br>
-      <input type='radio' name='ethnolinguistic-number' value='d'> 25`
-  }, {
-    question: 'What are the three major regions of the Philippines?',
-    choices: `<input type='checkbox' name='regions' value='a'> Mindoro<br>
-      <input type='checkbox' name='regions' value='b'> Luzon<br>
-      <input type='checkbox' name='regions' value='c'> Srivijaya<br>
-      <input type='checkbox' name='regions' value='d'> Mindanao<br>
-      <input type='checkbox' name='regions' value='e'> Visayas`
-  }, {
-    question: 'Who led the first Spanish expedition to the Philippines?',
-    choices: `<input type='radio' name='conquistador' value='a'> Karimul Makhdum<br>
-      <input type='radio' name='conquistador' value='b'> Zheng He<br>
-      <input type='radio' name='conquistador' value='c'> Ferdinand Magellan<br>
-      <input type='radio' name='conquistador' value='d'> Miguel Lopez de Legazpi`
-  }, {
-    question: 'Which Filipino ethnolinguistic group is the most well-known?',
-    choices: `<input type='radio' name='famous-group' value='a'> T'boli<br>
-      <input type='radio' name='famous-group' value='b'> Tagalog<br>
-      <input type='radio' name='famous-group' value='c'> Tutsi<br>
-      <input type='radio' name='famous-group' value='d'> Uyghurs`
-  }, {
-    question: 'The Philippines is a(n):',
-    choices: `<input type='radio' name='land-type' value='a'> peninsula or land mostly surrounded by water <br>
-      <input type='radio' name='land-type' value='b'> isthmus or narrow land connecting two larger areas across water<br>
-      <input type='radio' name='land-type' value='c'> fjord or long, narrow inlet with steep sides or cliffs<br>
-      <input type='radio' name='land-type' value='d'> archipelago or group of islands`
-  }, {
-    question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
-    choices: `<input type='radio' name='UNESCO' value='a'> Borubudur Temple Compounds<br>
-      <input type='radio' name='UNESCO' value='b'> Rice Terraces of Philippine Cordilleras<br>
-      <input type='radio' name='UNESCO' value='c'> Plaza Moraga<br>
-      <input type='radio' name='UNESCO' value='d'> Banaue Rice Terraces`
-  }, {
-    question: 'Which Filipino groups resisted Spanish expansion the longest?',
-    choices: `<input type='checkbox' name='resist' value='a'> Mestizos<br>
-      <input type='checkbox' name='resist' value='b'> Highlanders<br>
-      <input type='checkbox' name='resist' value='c'> Muslim Sultanates<br>
-      <input type='checkbox' name='resist' value='d'> Lowlanders`
-  }, {
-    question: 'How long did the Spanish Colonial Era last?',
-    choices: `<input type='radio' name='colonial-era' value='a'> 1000 years<br>
-      <input type='radio' name='colonial-era' value='b'> 333 years<br>
-      <input type='radio' name='colonial-era' value='c'> 42 days<br>
-      <input type='radio' name='colonial-era' value='d'> 12 weeks`
-  }, {
-    question: 'The Laguna Copperplate Inscription is important because:',
-    choices: `<input type='checkbox' name='LCI' value='a'> it's the earliest written record found in the Philippines<br>
-      <input type='checkbox' name='LCI' value='b'>it's written by Jose Rizal <br>
-      <input type='checkbox' name='LCI' value='c'> it proves the existence of ancient aliens<br>
-      <input type='checkbox' name='LCI' value='d'> it provides evidence of cultural exchange due to different languages used<br>
-      <input type='checkbox' name='LCI' value='e'> it shows the wealth of the Javanese empire`
-  }, {
-    question: 'Who is credited for bringing Islam to the Philippines?',
-    choices: `<input type='radio' name='islam' value='a'>An-Nasir Salah ad-Din Yusuf ibn Ayyub <br>
-      <input type='radio' name='islam' value='b'> Abdul Alhazred<br>
-      <input type='radio' name='islam' value='c'> Karimul Makhdum<br>
-      <input type='radio' name='islam' value='d'> Muhammad Ali`
+    choices: `<input class='people' type='radio' name='ethnolinguistic-number' value='a'> 1<br>
+      <input class='people' type='radio' name='ethnolinguistic-number' value='b'> 365<br>
+      <input class='people' type='radio' name='ethnolinguistic-number' value='c'> 175<br>
+      <input class='people' type='radio' name='ethnolinguistic-number' value='d'> 25`
+    }, {
+      question: 'What are the three major regions of the Philippines?',
+      choices: `<input type='checkbox' name='regions' value='a'> Mindoro<br>
+        <input type='checkbox' name='regions' value='b'> Luzon<br>
+        <input type='checkbox' name='regions' value='c'> Srivijaya<br>
+        <input type='checkbox' name='regions' value='d'> Mindanao<br>
+        <input type='checkbox' name='regions' value='e'> Visayas`
+    }, {
+      question: 'Who led the first Spanish expedition to the Philippines?',
+      choices: `<input type='radio' name='conquistador' value='a'> Karimul Makhdum<br>
+        <input type='radio' name='conquistador' value='b'> Zheng He<br>
+        <input type='radio' name='conquistador' value='c'> Ferdinand Magellan<br>
+        <input type='radio' name='conquistador' value='d'> Miguel Lopez de Legazpi`
+    }, {
+      question: 'Which Filipino ethnolinguistic group is the most well-known?',
+      choices: `<input type='radio' name='famous-group' value='a'> T'boli<br>
+        <input type='radio' name='famous-group' value='b'> Tagalog<br>
+        <input type='radio' name='famous-group' value='c'> Tutsi<br>
+        <input type='radio' name='famous-group' value='d'> Uyghurs`
+    }, {
+      question: 'The Philippines is a(n):',
+      choices: `<input type='radio' name='land-type' value='a'> peninsula or land mostly surrounded by water <br>
+        <input type='radio' name='land-type' value='b'> isthmus or narrow land connecting two larger areas across water<br>
+        <input type='radio' name='land-type' value='c'> fjord or long, narrow inlet with steep sides or cliffs<br>
+        <input type='radio' name='land-type' value='d'> archipelago or group of islands`
+    }, {
+      question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
+      choices: `<input type='radio' name='UNESCO' value='a'> Borubudur Temple Compounds<br>
+        <input type='radio' name='UNESCO' value='b'> Rice Terraces of Philippine Cordilleras<br>
+        <input type='radio' name='UNESCO' value='c'> Plaza Moraga<br>
+        <input type='radio' name='UNESCO' value='d'> Banaue Rice Terraces`
+    }, {
+      question: 'Which Filipino groups resisted Spanish expansion the longest?',
+      choices: `<input type='checkbox' name='resist' value='a'> Mestizos<br>
+        <input type='checkbox' name='resist' value='b'> Highlanders<br>
+        <input type='checkbox' name='resist' value='c'> Muslim Sultanates<br>
+        <input type='checkbox' name='resist' value='d'> Lowlanders`
+    }, {
+      question: 'How long did the Spanish Colonial Era last?',
+      choices: `<input type='radio' name='colonial-era' value='a'> 1000 years<br>
+        <input type='radio' name='colonial-era' value='b'> 333 years<br>
+        <input type='radio' name='colonial-era' value='c'> 42 days<br>
+        <input type='radio' name='colonial-era' value='d'> 12 weeks`
+    }, {
+      question: 'The Laguna Copperplate Inscription is important because:',
+      choices: `<input type='checkbox' name='LCI' value='a'> it's the earliest written record found in the Philippines<br>
+        <input type='checkbox' name='LCI' value='b'>it's written by Jose Rizal <br>
+        <input type='checkbox' name='LCI' value='c'> it proves the existence of ancient aliens<br>
+        <input type='checkbox' name='LCI' value='d'> it provides evidence of cultural exchange due to different languages used<br>
+        <input type='checkbox' name='LCI' value='e'> it shows the wealth of the Javanese empire`
+    }, {
+      question: 'Who is credited for bringing Islam to the Philippines?',
+      choices: `<input type='radio' name='islam' value='a'>An-Nasir Salah ad-Din Yusuf ibn Ayyub <br>
+        <input type='radio' name='islam' value='b'> Abdul Alhazred<br>
+        <input type='radio' name='islam' value='c'> Karimul Makhdum<br>
+        <input type='radio' name='islam' value='d'> Muhammad Ali`
   }];
-  let questionNumber = 1;
 
   submitAnswerBtn.on('click', function() {
     //randomly generate an integer between 0 and length of the array
@@ -324,6 +331,9 @@ $(document).ready(() => {
     if (submitAnswerBtn.text() === 'Begin Quiz') {
       submitAnswerBtn.text('Submit Answer');
     }
+    // if (submitAnswerBtn.text() === 'Submit Answer') {
+    //   feedback.show();
+    // }
     //checks to see if array is empty
     //if not empty, randomly choose and render a question and choices object
     //then remove that object from the array
@@ -337,10 +347,52 @@ $(document).ready(() => {
       choices.html(randomChoices);
       questionAndChoices.splice(i, 1);
       questionNumber++;
-      console.log(i);
-      console.log(questionAndChoices);
-      console.log(questionAndChoices.length);
+      // console.log(i);
+      // console.log(questionAndChoices);
+      // console.log(questionAndChoices.length);
     }
+
+    // if (submitAnswerBtn.text() === 'Submit Answer') {
+    //   switch (choices.find('input[name="ethnolinguistic-number"]:checked').val()) {
+    //     case 'a':
+    //       feedbackHeader.text('Wrong!');
+    //       feedbackText.text('Try Again!');
+    //       console.log('wrong');
+    //       break;
+    //     case 'b':
+    //       feedbackHeader.text('Wrong!');
+    //       feedbackText.text('Try Again!');
+    //       console.log('wrong');
+    //       break;
+    //     case 'c':
+    //       answerScore++;
+    //       console.log('right');
+    //       console.log(answerScore);
+    //       break;
+    //     case 'd':
+    //       feedbackHeader.text('Wrong!');
+    //       feedbackText.text('Try Again!');
+    //       console.log('wrong');
+    //       break;
+    //     default:
+    //     console.log('something went wrong');
+    //
+    //   }
+    // }
+
+  });
+
+  $('.get-value').on('click', function(){
+    console.log($('input[name=ethnolinguistic-number]:checked', '#choices').val());
+    console.log($('input[name=regions]:checked', '#choices').val());
+    console.log($('input[name=conquistador]:checked', '#choices').val());
+    console.log($('input[name=famous-group]:checked', '#choices').val());
+    console.log($('input[name=land-type]:checked', '#choices').val());
+    console.log($('input[name=UNESCO]:checked', '#choices').val());
+    console.log($('input[name=resist]:checked', '#choices').val());
+    console.log($('input[name=colonial-era]:checked', '#choices').val());
+    console.log($('input[name=LCI]:checked', '#choices').val());
+    console.log($('input[name=islam]:checked', '#choices').val());
   });
 
 
