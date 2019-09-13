@@ -22,7 +22,7 @@ $(document).ready(() => {
   const ilongotThumbnail = $('#IlongotGallery img');
   const highlandThumbnail = $('.img-thumbnail');
 
-  const people = $('.people');
+  //quiz variables
   const feedback = $('.feedback');
   const feedbackHeader = $("#feedback-header");
   const feedbackText = $("#feedback-text");

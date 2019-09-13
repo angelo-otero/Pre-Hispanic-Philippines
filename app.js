@@ -10,68 +10,94 @@ let questionNumber = 0;
 let answerScore = 0;
 let randomQuestion = "Before you begin...";
 let randomChoices = "It's best that you read through the rest of the website first. It's no fun simply googling the answers. Good luck! 😀";
+let inputType = "";
+let inputName = "";
+let choice1 = "";
+let choice2 = "";
+let choice3 = "";
+let choice4 = "";
 
 //array containing questions and their choices
 const questionAndChoices = [{
   question: 'About how many Filipino ethnolinguistic groups currently exist?',
-  choices: `<input class='people' type='radio' name='ethnolinguistic-number' value='a'> 1<br>
-    <input class='people' type='radio' name='ethnolinguistic-number' value='b'> 365<br>
-    <input class='people' type='radio' name='ethnolinguistic-number' value='c'> 175<br>
-    <input class='people' type='radio' name='ethnolinguistic-number' value='d'> 25`
+  inputType: 'radio',
+  inputName: 'ethnolinguistic-group',
+  choice1: '1',
+  choice2: '365',
+  choice3: '175',
+  choice4: '25'
 }, {
   question: 'What are the three major regions of the Philippines?',
-  choices: `<input type='checkbox' name='regions' value='a'> Mindoro<br>
-      <input type='checkbox' name='regions' value='b'> Luzon<br>
-      <input type='checkbox' name='regions' value='c'> Mindanao<br>
-      <input type='checkbox' name='regions' value='d'> Visayas`
+  inputType: 'checkbox',
+  inputName: 'regions',
+  choice1: 'Mindoro',
+  choice2: 'Luzon',
+  choice3: 'Mindanao',
+  choice4: 'Visayas'
 }, {
   question: 'Who led the first Spanish expedition to the Philippines?',
-  choices: `<input type='radio' name='conquistador' value='a'> Karimul Makhdum<br>
-      <input type='radio' name='conquistador' value='b'> Zheng He<br>
-      <input type='radio' name='conquistador' value='c'> Ferdinand Magellan<br>
-      <input type='radio' name='conquistador' value='d'> Miguel Lopez de Legazpi`
+  inputType: 'radio',
+  inputName: 'conquistador',
+  choice1: 'Karimul Makhdum',
+  choice2: 'Zheng He',
+  choice3: 'Ferdinand Magellan',
+  choice4: 'Miguel Lopez de Legazpi'
 }, {
   question: 'Which Filipino ethnolinguistic group is the most well-known?',
-  choices: `<input type='radio' name='famous-group' value='a'> T'boli<br>
-      <input type='radio' name='famous-group' value='b'> Tagalog<br>
-      <input type='radio' name='famous-group' value='c'> Tutsi<br>
-      <input type='radio' name='famous-group' value='d'> Uyghurs`
+  inputType: 'radio',
+  inputName: 'famous-group',
+  choice1: "T'boli",
+  choice2: 'Tagalog',
+  choice3: 'Tutsi',
+  choice4: 'Uyghurs'
 }, {
   question: 'The Philippines is a(n):',
-  choices: `<input type='radio' name='land-type' value='a'> peninsula or land mostly surrounded by water <br>
-      <input type='radio' name='land-type' value='b'> isthmus or narrow land connecting two larger areas across water<br>
-      <input type='radio' name='land-type' value='c'> fjord or long, narrow inlet with steep sides or cliffs<br>
-      <input type='radio' name='land-type' value='d'> archipelago or group of islands`
+  inputType: 'radio',
+  inputName: 'land-type',
+  choice1: 'peninsula or land mostly surrounded by water',
+  choice2: 'isthmus or narrow land connecting two larger areas across water',
+  choice3: 'fjord or long, narrow inlet with steep sides or cliffs',
+  choice4: 'archipelago or group of islands'
 }, {
   question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
-  choices: `<input type='radio' name='UNESCO' value='a'> Borubudur Temple Compounds<br>
-      <input type='radio' name='UNESCO' value='b'> Rice Terraces of Philippine Cordilleras<br>
-      <input type='radio' name='UNESCO' value='c'> Plaza Moraga<br>
-      <input type='radio' name='UNESCO' value='d'> Banaue Rice Terraces`
+  inputType: 'radio',
+  inputName: 'UNESCO',
+  choice1: 'Borubudur Temple Compounds',
+  choice2: 'Rice Terraces of Philippine Cordilleras',
+  choice3: 'Plaza Moraga',
+  choice4: 'Banaue Rice Terraces'
 }, {
   question: 'Which Filipino groups resisted Spanish expansion the longest?',
-  choices: `<input type='checkbox' name='resist' value='a'> Mestizos<br>
-      <input type='checkbox' name='resist' value='b'> Highlanders<br>
-      <input type='checkbox' name='resist' value='c'> Muslim Sultanates<br>
-      <input type='checkbox' name='resist' value='d'> Lowlanders`
+  inputType: 'checkbox',
+  inputName: 'resist',
+  choice1: 'Mestizos',
+  choice2: 'Highlanders',
+  choice3: 'Muslim Sultanates',
+  choice4: 'Lowlanders'
 }, {
   question: 'How long did the Spanish Colonial Era last?',
-  choices: `<input type='radio' name='colonial-era' value='a'> 1000 years<br>
-      <input type='radio' name='colonial-era' value='b'> 333 years<br>
-      <input type='radio' name='colonial-era' value='c'> 42 days<br>
-      <input type='radio' name='colonial-era' value='d'> 12 weeks`
+  inputType: 'radio',
+  inputName: 'colonial-era',
+  choice1: '1000 years',
+  choice2: '333 years',
+  choice3: '42 days',
+  choice4: '12 weeks'
 }, {
   question: 'The Laguna Copperplate Inscription is important because:',
-  choices: `<input type='checkbox' name='LCI' value='a'> it's the earliest written record found in the Philippines<br>
-      <input type='checkbox' name='LCI' value='b'>it's written by Jose Rizal <br>
-      <input type='checkbox' name='LCI' value='c'> it proves the existence of ancient aliens<br>
-      <input type='checkbox' name='LCI' value='d'> it provides evidence of cultural exchange due to different languages used<br>`
+  inputType: 'checkbox',
+  inputName: 'LCI',
+  choice1: "it's the earliest written record found in the Philippines",
+  choice2: "it's written by Jose Rizal",
+  choice3: "it proves the existence of ancient aliens",
+  choice4: "it provides evidence of cultural exchange due to different languages used"
 }, {
   question: 'Who is credited for bringing Islam to the Philippines?',
-  choices: `<input type='radio' name='islam' value='a'>An-Nasir Salah ad-Din Yusuf ibn Ayyub <br>
-      <input type='radio' name='islam' value='b'> Abdul Alhazred<br>
-      <input type='radio' name='islam' value='c'> Karimul Makhdum<br>
-      <input type='radio' name='islam' value='d'> Muhammad Ali`
+  inputType: 'radio',
+  inputName: 'islam',
+  choice1: "An-Nasir Salah ad-Din Yusuf ibn Ayyub",
+  choice2: "Abdul Alhazred",
+  choice3: "Karimul Makhdum",
+  choice4: "Muhammad Ali"
 }];
 
 app.set("view engine", "ejs");
@@ -94,8 +120,17 @@ app.get("/highland", function(req, res) {
 });
 
 app.get("/quiz", function(req, res) {
-  res.render("quiz", {randomQuestion: randomQuestion,
-  randomChoices: randomChoices, questionNumber: questionNumber});
+  res.render("quiz", {
+    randomQuestion: randomQuestion,
+    randomChoices: randomChoices,
+    questionNumber: questionNumber,
+    inputType: inputType,
+    inputName: inputName,
+    choice1: choice1,
+    choice2: choice2,
+    choice3: choice3,
+    choice4: choice4
+  });
 });
 
 app.post("/quiz", function(req, res) {
@@ -110,7 +145,12 @@ app.post("/quiz", function(req, res) {
     randomChoices = "Congratulations!";
   } else {
     randomQuestion = questionAndChoices[i].question;
-    randomChoices = questionAndChoices[i].choices;
+    inputType = questionAndChoices[i].inputType;
+    inputName = questionAndChoices[i].inputName;
+    choice1 = questionAndChoices[i].choice1;
+    choice2 = questionAndChoices[i].choice2;
+    choice3 = questionAndChoices[i].choice3;
+    choice4 = questionAndChoices[i].choice4;
     questionAndChoices.splice(i, 1);
     questionNumber++;
     console.log(questionNumber);

@@ -467,8 +467,12 @@ footer ul {
   height: 60%;
 }
 
-.choices {
+#choices {
   margin-top: 20px;
+}
+
+#choices input, label {
+
 }
 
 .submit-answer {
