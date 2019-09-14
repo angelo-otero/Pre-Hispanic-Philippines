@@ -471,8 +471,8 @@ footer ul {
   margin-top: 20px;
 }
 
-#choices input, label {
-
+#choices span {
+  display: block;
 }
 
 .submit-answer {

@@ -10,32 +10,45 @@
         <%= questionNumber %> out of 10</h4>
       <%  } %>
 
-      <h3>
+      <h3 class=".random-question">
         <%= randomQuestion %>
       </h3>
 
       <form action="/quiz" id="choices" method="post">
         <% if (questionNumber == 0) { %>
         <p>It's best to read through the rest of the website first. Googling the answers takes away the fun. Good luck! 😀</p>
-        <% } else { %>
-          <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
-          <label for="questionChoice1">
-            <%= choice1 %></label>
-          <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
-          <label for="questionChoice2">
-            <%= choice2 %></label>
-          <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
-          <label for="questionChoice3">
-            <%= choice3 %></label>
-          <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
-          <label for="questionChoice4">
-            <%= choice4 %></label>
+        <% } %>
+        <% if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
+            <label for="questionChoice1">
+              <%= choice1 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
+            <label for="questionChoice2">
+              <%= choice2 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
+            <label for="questionChoice3">
+              <%= choice3 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
+            <label for="questionChoice4">
+              <%= choice4 %></label>
+          </span>
+
+        <% } %>
+        <% if (randomQuestion === "You've finished!") { %>
+          <p>Congratulations!</p>
         <% } %>
 
         <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-        <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
+          <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
         <%  } else { %>
-        <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
+          <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
         <%  } %>
 
 
@@ -73,9 +86,6 @@
     </div>
   </div>
 </div> -->
-
-
-
 
 
 <%- include('partials/footer') -%>

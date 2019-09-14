@@ -23,6 +23,8 @@ $(document).ready(() => {
   const highlandThumbnail = $('.img-thumbnail');
 
   //quiz variables
+  const randomQuestion = $('.random-question');
+  const choices = $('#choices');
   const feedback = $('.feedback');
   const feedbackHeader = $("#feedback-header");
   const feedbackText = $("#feedback-text");
