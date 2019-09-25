@@ -16,48 +16,55 @@ let choice1 = "";
 let choice2 = "";
 let choice3 = "";
 let choice4 = "";
+const correctAnswers = [];
+const userAnswers = [];
 
 //array containing questions and their choices
 const questionAndChoices = [{
   question: 'About how many Filipino ethnolinguistic groups currently exist?',
   inputType: 'radio',
-  inputName: 'ethnolinguistic-group',
+  inputName: 'ethnolinguisticGroup',
   choice1: '1',
   choice2: '365',
   choice3: '175',
-  choice4: '25'
-}, {
-  question: 'What are the three major regions of the Philippines?',
-  inputType: 'checkbox',
-  inputName: 'regions',
-  choice1: 'Mindoro',
-  choice2: 'Luzon',
-  choice3: 'Mindanao',
-  choice4: 'Visayas'
-}, {
+  choice4: '25',
+  answer: 'c'
+// }, {
+//   question: 'What are the three major regions of the Philippines?',
+//   inputType: 'checkbox',
+//   inputName: 'regions',
+//   choice1: 'Mindoro',
+//   choice2: 'Luzon',
+//   choice3: 'Mindanao',
+//   choice4: 'Visayas',
+//   answer: ['b','c', 'd']
+ }, {
   question: 'Who led the first Spanish expedition to the Philippines?',
   inputType: 'radio',
   inputName: 'conquistador',
   choice1: 'Karimul Makhdum',
   choice2: 'Zheng He',
   choice3: 'Ferdinand Magellan',
-  choice4: 'Miguel Lopez de Legazpi'
+  choice4: 'Miguel Lopez de Legazpi',
+  answer: 'c'
 }, {
   question: 'Which Filipino ethnolinguistic group is the most well-known?',
   inputType: 'radio',
-  inputName: 'famous-group',
+  inputName: 'famousGroup',
   choice1: "T'boli",
   choice2: 'Tagalog',
   choice3: 'Tutsi',
-  choice4: 'Uyghurs'
+  choice4: 'Uyghurs',
+  answer: 'b'
 }, {
   question: 'The Philippines is a(n):',
   inputType: 'radio',
-  inputName: 'land-type',
+  inputName: 'landType',
   choice1: 'peninsula or land mostly surrounded by water',
   choice2: 'isthmus or narrow land connecting two larger areas across water',
   choice3: 'fjord or long, narrow inlet with steep sides or cliffs',
-  choice4: 'archipelago or group of islands'
+  choice4: 'archipelago or group of islands',
+  answer: 'd'
 }, {
   question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
   inputType: 'radio',
@@ -65,7 +72,8 @@ const questionAndChoices = [{
   choice1: 'Borubudur Temple Compounds',
   choice2: 'Rice Terraces of Philippine Cordilleras',
   choice3: 'Plaza Moraga',
-  choice4: 'Banaue Rice Terraces'
+  choice4: 'Banaue Rice Terraces',
+  answer: 'b'
 }, {
   question: 'Which Filipino groups resisted Spanish expansion the longest?',
   inputType: 'checkbox',
@@ -73,23 +81,26 @@ const questionAndChoices = [{
   choice1: 'Mestizos',
   choice2: 'Highlanders',
   choice3: 'Muslim Sultanates',
-  choice4: 'Lowlanders'
+  choice4: 'Lowlanders',
+  answer: ['b', 'c']
 }, {
   question: 'How long did the Spanish Colonial Era last?',
   inputType: 'radio',
-  inputName: 'colonial-era',
+  inputName: 'colonialEra',
   choice1: '1000 years',
   choice2: '333 years',
   choice3: '42 days',
-  choice4: '12 weeks'
+  choice4: '12 weeks',
+  answer: 'b'
 }, {
   question: 'The Laguna Copperplate Inscription is important because:',
   inputType: 'checkbox',
   inputName: 'LCI',
   choice1: "it's the earliest written record found in the Philippines",
-  choice2: "it's written by Jose Rizal",
+  choice2: "it's written by Filipino national hero, Jose Rizal",
   choice3: "it proves the existence of ancient aliens",
-  choice4: "it provides evidence of cultural exchange due to different languages used"
+  choice4: "it provides evidence of cultural exchange due to different languages used",
+  answer: ['a', 'd']
 }, {
   question: 'Who is credited for bringing Islam to the Philippines?',
   inputType: 'radio',
@@ -97,8 +108,9 @@ const questionAndChoices = [{
   choice1: "An-Nasir Salah ad-Din Yusuf ibn Ayyub",
   choice2: "Abdul Alhazred",
   choice3: "Karimul Makhdum",
-  choice4: "Muhammad Ali"
-}];
+  choice4: "Muhammad Ali",
+  answer: 'c'
+ }];
 
 app.set("view engine", "ejs");
 
@@ -134,6 +146,7 @@ app.get("/quiz", function(req, res) {
 });
 
 app.post("/quiz", function(req, res) {
+  const reqBody = req.body;
   //randomly generate an integer between 0 and length of the array
   let i = Math.floor(Math.random() * questionAndChoices.length);
 
@@ -151,11 +164,26 @@ app.post("/quiz", function(req, res) {
     choice2 = questionAndChoices[i].choice2;
     choice3 = questionAndChoices[i].choice3;
     choice4 = questionAndChoices[i].choice4;
+    correctAnswers.push(questionAndChoices[i].answer);
+    // userAnswers.push(req.body.ethnolinguisticGroup);
+    // userAnswers.push(req.body.regions);
+    // userAnswers.push(req.body.conquistador);
+    // userAnswers.push(req.body.famousGroup);
+    // userAnswers.push(req.body.landType);
     questionAndChoices.splice(i, 1);
     questionNumber++;
-    console.log(questionNumber);
-  }
 
+    console.log(correctAnswers);
+    console.log(userAnswers);
+    console.log(correctAnswers[correctAnswers.length -2]);
+    console.log(userAnswers[userAnswers.length -1]);
+    // if (req.body.ethnolinguisticGroup === correctAnswers[correctAnswers.length - 1]) {
+    //   console.log("Correct!");
+    //   answerScore++;
+    //   console.log(answerScore);
+    // }
+
+  }
   res.redirect('/quiz');
 });
 
