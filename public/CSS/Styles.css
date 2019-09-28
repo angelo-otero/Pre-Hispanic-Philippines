@@ -9,6 +9,27 @@ body {
   background-color: #ffffff;
 }
 
+.general-padding {
+  padding: 3% 8%;
+}
+
+.hero-landing {
+  background: linear-gradient(rgba(9, 132, 227, .5), rgba(9, 132, 227, .5)), url("../Images/IndexLanding.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-column: 1/-1;
+  min-height: 500px;
+}
+
+.page-description {
+  width: 55%;
+  padding: 5%;
+  padding-left: 10%;
+  color: #ffffff;
+}
+
 /* Typgraphy */
 h1, h2, h3, h4 {
   font-family: 'Playfair Display SC', serif;
@@ -112,18 +133,7 @@ a:hover {
   background-color: rgba(9, 132, 227, .5);
 }
 
-.general-padding {
-  padding: 3% 10%;
-}
-
-.page-description {
-  width: 55%;
-  padding: 5%;
-  padding-left: 10%;
-  color: #ffffff;
-}
-
-/* Header Styles */
+/* nav Styles */
 .navbar {
   background-color: #2d3436;
 }
@@ -168,9 +178,14 @@ a:hover {
 footer {
   font-size: .85rem;
   background-color: #2d3436;
-  display: flex;
-  justify-content: space-between;
-  padding: 1% 10%;
+  display: grid;
+  grid-space: 0;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  padding: 3% 10%;
+}
+
+footer p {
+  text-align: right;
 }
 
 .copyright {
@@ -178,7 +193,7 @@ footer {
 }
 
 .links {
-  width: 20%;
+  width: 40%;
 }
 
 .links a {
@@ -215,16 +230,6 @@ footer li {
 
 /* Home Page Styles */
 /* These are styles found on the home page */
-.hero-landing {
-  background: linear-gradient(rgba(9, 132, 227, .5), rgba(9, 132, 227, .5)), url("../Images/IndexLanding.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 500px;
-
-}
-
 .basic-info {
   background-color: #636e72;
   color: #ffffff;
@@ -236,28 +241,19 @@ footer li {
 }
 
 .time-period {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
-  flex-shrink: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px ,1fr));
+  grid-column-gap: 10%;
   align-items: center;
+  justify-content: space-between;
 }
 
-.time-period-img {
-  width: 340px;
-  height: 200px;
-  /* position: absolute;
-  left: 68%; */
+/* .time-period-img {
 }
 
 .time-period-description {
-  width: 65%;
-  margin-right: 15px;
-}
 
-.time-period-description p {
-  height: 243px;
-}
+} */
 
 .residences {
   padding: 3% 15%;
@@ -278,6 +274,10 @@ footer li {
 
 .card {
   margin: 0 15px 30px;
+}
+
+.card-lowland, .card-highland {
+  width: 18rem;
 }
 
 .card-lowland .img-container {
@@ -312,34 +312,15 @@ footer li {
 }
 
 .lowland-group {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
+  grid-column-gap: 10%;
   margin-bottom: 30px;
 }
 
-.lowland-group-images {
-  width: 50%;
-  margin: 0 15px 15px 0;
-}
-
-.lowland-group-img {
-  width: 100%;
-  height: auto;
-}
-
-.filipino-group-description {
-  width: 50%;
-}
-
-.second-filipino-group {
-  flex-direction: row-reverse;
-}
-
-.second-filipino-group .lowland-group-images {
-  margin: 0 0 15px 15px;
-}
+/* .lowland-group-images {
+  height: 275px !important;
+} */
 
 #Visayas {
   background-color: #b2bec3;
@@ -347,6 +328,10 @@ footer li {
 
 #Visayas .italicized, #Mindanao .italicized, .palawan .italicized, #Ilongot .italicized {
   color: #636e72;
+}
+
+.region-name {
+  margin-bottom: 20px;
 }
 
 .region-name h1 {
@@ -503,22 +488,23 @@ footer li {
 /* About Page Styles */
 /* These are styles found on the about page */
 .about-page {
-  height: 85vh;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+   min-height: 85vh;
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax( 350px, 1fr) );
 }
 
 .my-photo {
-  background-image: url("../Images/Me.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.my-photo img {
+  overflow: hidden;
+  height: auto;
 }
 
 .about-description-container {
-  width: 50%;
   display: flex;
   align-items: center;
 }
@@ -526,8 +512,10 @@ footer li {
 /* Further Reading Styles  */
 /* These are styles found on the Further Reading Page */
 .resources {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-column-gap: 15%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
 }
 
 .further-reading h1, .video-header {
@@ -539,16 +527,16 @@ footer li {
   margin-bottom: 30px;
 }
 
-.resources {
-  display: flex;
-  flex-direction: row;
+.book-container, .article-container {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
-.book {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.article-container {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
 
 .book img {
   width: 100px;
@@ -556,14 +544,78 @@ footer li {
   margin-right: 15px;
 }
 
-.books, .online-articles {
-  width: 45%;
+.videos {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  justify-items: center;
 }
 
-.videos {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 30px;
+/* .videos iframe {
+  max-width: 350px;
+} */
+
+/* Media Queries */
+@media only screen and (max-width: 999px) {
+  body {
+    font-size: 14px;
+  }
+
+  .hero-landing {
+    height: 50vh;
+  }
+
+  .page-description {
+    width: 95%;
+  }
+
+  .about-description {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  footer p {
+    text-align: left;
+  }
+
+  .my-photo {
+    margin: 0 auto;
+    margin-top: 3%;
+  }
+
+  .my-photo img {
+    width: 50%;
+    border-radius: 50%;
+  }
+
+  .about-page {
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .time-period {
+    grid-template-columns: repeat(auto-fill, minmax(275px ,1fr));
+    grid-column-gap: 17%;
+  }
+  .residences {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .residences-cards {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .card-lowland, .card-highland {
+    width: 100%;
+  }
+
+  .lowland-group {
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-column-gap: 10%;
+  }
 }
