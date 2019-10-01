@@ -29,15 +29,15 @@ const questionAndChoices = [{
   choice3: '175',
   choice4: '25',
   answer: 'c'
-// }, {
-//   question: 'What are the three major regions of the Philippines?',
-//   inputType: 'checkbox',
-//   inputName: 'regions',
-//   choice1: 'Mindoro',
-//   choice2: 'Luzon',
-//   choice3: 'Mindanao',
-//   choice4: 'Visayas',
-//   answer: ['b','c', 'd']
+  }, {
+    question: 'What are the three major regions of the Philippines?',
+    inputType: 'checkbox',
+    inputName: 'regions',
+    choice1: 'Mindoro',
+    choice2: 'Luzon',
+    choice3: 'Mindanao',
+    choice4: 'Visayas',
+    answer: ['b','c', 'd']
  }, {
   question: 'Who led the first Spanish expedition to the Philippines?',
   inputType: 'radio',

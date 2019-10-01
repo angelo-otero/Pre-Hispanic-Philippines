@@ -1,16 +1,16 @@
 <%- include('partials/header') -%>
 
 <section class="quiz">
-  <div class="question-and-answer">
+  <div class="question-and-answer general-padding">
     <div class="question">
 
 
       <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-      <h4>Question
-        <%= questionNumber %> out of 10</h4>
+      <h4 class="question-number">Question
+        <%= questionNumber %>/10:</h4>
       <%  } %>
 
-      <h3 class=".random-question">
+      <h3 class="random-question">
         <%= randomQuestion %>
       </h3>
 
@@ -19,26 +19,29 @@
         <p>It's best to read through the rest of the website first. Googling the answers takes away the fun. Good luck! 😀</p>
         <% } %>
         <% if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
-            <label for="questionChoice1">
-              <%= choice1 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
-            <label for="questionChoice2">
-              <%= choice2 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
-            <label for="questionChoice3">
-              <%= choice3 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
-            <label for="questionChoice4">
-              <%= choice4 %></label>
-          </span>
+          <div class="choices-container">
+            <span>
+              <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
+              <label for="questionChoice1">
+                <%= choice1 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
+              <label for="questionChoice2">
+                <%= choice2 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
+              <label for="questionChoice3">
+                <%= choice3 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
+              <label for="questionChoice4">
+                <%= choice4 %></label>
+            </span>
+          </div>
+
 
         <% } %>
         <% if (randomQuestion === "You've finished!") { %>
