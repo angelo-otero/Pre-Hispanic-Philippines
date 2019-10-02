@@ -353,45 +353,32 @@ footer li {
 
 .highland-people {
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 }
 
-.highland-people-img-container {
+/* .highland-people-img-container {
   width: 50%;
-  position: relative;
-}
+
+} */
 
 .highland-people-img {
   width: 100%;
   height: 500px;
 }
 
-.highland-group-info, .highland-people-gallery {
-  position: absolute;
-}
-
-.highland-button {
-  position: relative;
-  width: 150px;
-  top: 70%;
-  left: 20%;
+.highland-people-gallery {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .img-thumbnail {
   width: 148.4px;
   height: 100px;
-  margin: 15px;
 }
 
-.img-thumbnail.left {
-  margin-left: 0;
-}
-
-.gallery-row {
-  display: flex;
-  flex-direction: row;
-}
 
 .igorot {
   text-align: center;
@@ -423,16 +410,12 @@ footer li {
 
 .palawan-container {
   padding: .75% 5% 3%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: 90px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 
-.card-palawan {
-  width: 30%;
-}
-
-.card-palawan .card-img-top {
+.card-img-top {
   height: 300px;
 }
 
