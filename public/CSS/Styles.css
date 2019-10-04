@@ -121,6 +121,11 @@ a:hover {
 }
 
 
+.carousel-control-next, .carousel-control-prev {
+  width: 10%;
+  height: auto;
+}
+
 .carousel-control-next:hover {
   background-color: #0984e3;
   background-color: rgba(9, 132, 227, .5);
@@ -132,7 +137,11 @@ a:hover {
 }
 
 /* nav Styles */
-.navbar {
+header {
+  padding: 15px;
+}
+
+header, .navbar {
   background-color: #2d3436;
 }
 
@@ -159,6 +168,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   color: #fdcb6e;
+  text-align: center;
 }
 
 .logo img {
@@ -311,7 +321,8 @@ footer li {
 }
 
 /* .lowland-group-images {
-  height: 275px !important;
+  min-height: 100px;
+  max-height: 275px;
 } */
 
 #Visayas {
@@ -356,6 +367,7 @@ footer li {
 }
 
 .highland {
+  position: relative;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(4, 1fr);
@@ -364,16 +376,15 @@ footer li {
 
 .highland-group-info {
   grid-column: 1/5;
-  grid-row: 1/5;
+  grid-row: 1/4;
 }
 
 .highland-people-gallery {
   grid-column: 1/5;
   grid-row: 1/4;
   display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  justify-self: center;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(197px, 1fr));
 }
 
 .highland-button {
@@ -507,7 +518,6 @@ footer li {
 .my-photo img {
   overflow: hidden;
   height: auto;
-  text-indent: -50%;
 }
 
 .about-description-container {
@@ -558,6 +568,12 @@ footer li {
 
 
 /* Media Queries */
+@media only screen and (max-width: 1125px) {
+  .highland-people {
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  }
+}
+
 @media only screen and (max-width: 999px) {
   body {
     font-size: 14px;
@@ -574,6 +590,7 @@ footer li {
   .about-description {
     text-align: center;
   }
+
 }
 
 @media only screen and (max-width: 700px) {
@@ -587,7 +604,7 @@ footer li {
   }
 
   .highland-people {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   }
 
   .my-photo img {
@@ -619,6 +636,10 @@ footer li {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  .highland-people {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 
   .card-lowland, .card-highland {
