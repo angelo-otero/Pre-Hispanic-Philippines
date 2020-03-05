@@ -1,4 +1,5 @@
 // jshint esversion: 6
+require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -19,6 +20,7 @@ let choice4 = "";
 const correctAnswers = [];
 const userAnswers = [];
 
+
 //array containing questions and their choices
 const questionAndChoices = [{
   question: 'About how many Filipino ethnolinguistic groups currently exist?',
@@ -28,7 +30,7 @@ const questionAndChoices = [{
   choice2: '365',
   choice3: '175',
   choice4: '25',
-  answer: 'c'
+  answer: process.env.ANSWER_ONE
   }, {
     question: 'What are the three major regions of the Philippines?',
     inputType: 'checkbox',
@@ -37,7 +39,7 @@ const questionAndChoices = [{
     choice2: 'Luzon',
     choice3: 'Mindanao',
     choice4: 'Visayas',
-    answer: ['b','c', 'd']
+    answer: process.env.ANSWER_TWO.split(',')
  }, {
   question: 'Who led the first Spanish expedition to the Philippines?',
   inputType: 'radio',
@@ -46,7 +48,7 @@ const questionAndChoices = [{
   choice2: 'Zheng He',
   choice3: 'Ferdinand Magellan',
   choice4: 'Miguel Lopez de Legazpi',
-  answer: 'c'
+  answer: process.env.ANSWER_THREE
 }, {
   question: 'Which Filipino ethnolinguistic group is the most well-known?',
   inputType: 'radio',
@@ -55,7 +57,7 @@ const questionAndChoices = [{
   choice2: 'Tagalog',
   choice3: 'Tutsi',
   choice4: 'Uyghurs',
-  answer: 'b'
+  answer: process.env.ANSWER_FOUR
 }, {
   question: 'The Philippines is a(n):',
   inputType: 'radio',
@@ -64,7 +66,7 @@ const questionAndChoices = [{
   choice2: 'isthmus or narrow land connecting two larger areas across water',
   choice3: 'fjord or long, narrow inlet with steep sides or cliffs',
   choice4: 'archipelago or group of islands',
-  answer: 'd'
+  answer: process.env.ANSWER_FIVE
 }, {
   question: 'Which of these places in the Philippines is listed as a UNESCO World Heritage Site?',
   inputType: 'radio',
@@ -73,7 +75,7 @@ const questionAndChoices = [{
   choice2: 'Rice Terraces of Philippine Cordilleras',
   choice3: 'Plaza Moraga',
   choice4: 'Banaue Rice Terraces',
-  answer: 'b'
+  answer: process.env.ANSWER_SIX
 }, {
   question: 'Which Filipino groups resisted Spanish expansion the longest?',
   inputType: 'checkbox',
@@ -82,7 +84,7 @@ const questionAndChoices = [{
   choice2: 'Highlanders',
   choice3: 'Muslim Sultanates',
   choice4: 'Lowlanders',
-  answer: ['b', 'c']
+  answer: process.env.ANSWER_SEVEN.split(',')
 }, {
   question: 'How long did the Spanish Colonial Era last?',
   inputType: 'radio',
@@ -91,7 +93,7 @@ const questionAndChoices = [{
   choice2: '333 years',
   choice3: '42 days',
   choice4: '12 weeks',
-  answer: 'b'
+  answer: process.env.ANSWER_EIGHT
 }, {
   question: 'The Laguna Copperplate Inscription is important because:',
   inputType: 'checkbox',
@@ -100,7 +102,7 @@ const questionAndChoices = [{
   choice2: "it's written by Filipino national hero, Jose Rizal",
   choice3: "it proves the existence of ancient aliens",
   choice4: "it provides evidence of cultural exchange due to different languages used",
-  answer: ['a', 'd']
+  answer: process.env.ANSWER_NINE.split(',')
 }, {
   question: 'Who is credited for bringing Islam to the Philippines?',
   inputType: 'radio',
@@ -109,7 +111,7 @@ const questionAndChoices = [{
   choice2: "Abdul Alhazred",
   choice3: "Karimul Makhdum",
   choice4: "Muhammad Ali",
-  answer: 'c'
+  answer: process.env.ANSWER_TEN
  }];
 
 app.set("view engine", "ejs");
@@ -117,6 +119,9 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(bodyParser.json());
+
 app.use(express.static("public"));
 
 app.get("/", function(req, res) {
@@ -145,13 +150,28 @@ app.get("/quiz", function(req, res) {
   });
 });
 
+function getScore (correctAnswers, userAnswers) {
+  const wrongAnswers = [];
+  for(let i = 0; i < userAnswers.length; i++){
+    if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])){
+      answerScore++;
+    } else {
+      wrongAnswers.push(JSON.stringify(userAnswers[i]));
+    }
+  }
+  console.log(wrongAnswers);
+  console.log(answerScore);
+}
+
+
 app.post("/quiz", function(req, res) {
   const reqBody = req.body;
   //randomly generate an integer between 0 and length of the array
   let i = Math.floor(Math.random() * questionAndChoices.length);
+  let obj = {};
 
   //checks to see if array is empty
-  //if not empty, randomly choose and render a question and choices object
+  //if not empty, randomly choose and render a question and its choices object
   //then remove that object from the array
   if (!questionAndChoices || !questionAndChoices.length) {
     randomQuestion = "You've finished!";
@@ -164,26 +184,25 @@ app.post("/quiz", function(req, res) {
     choice2 = questionAndChoices[i].choice2;
     choice3 = questionAndChoices[i].choice3;
     choice4 = questionAndChoices[i].choice4;
-    correctAnswers.push(questionAndChoices[i].answer);
-    // userAnswers.push(req.body.ethnolinguisticGroup);
-    // userAnswers.push(req.body.regions);
-    // userAnswers.push(req.body.conquistador);
-    // userAnswers.push(req.body.famousGroup);
-    // userAnswers.push(req.body.landType);
+
+    obj[inputName] = questionAndChoices[i].answer;
+
+    correctAnswers.push(obj);
     questionAndChoices.splice(i, 1);
     questionNumber++;
-
-    console.log(correctAnswers);
-    console.log(userAnswers);
-    console.log(correctAnswers[correctAnswers.length -2]);
-    console.log(userAnswers[userAnswers.length -1]);
-    // if (req.body.ethnolinguisticGroup === correctAnswers[correctAnswers.length - 1]) {
-    //   console.log("Correct!");
-    //   answerScore++;
-    //   console.log(answerScore);
-    // }
-
   }
+
+if(questionNumber > 1) {
+  userAnswers.push(reqBody);
+}
+
+if(randomQuestion == "You've finished!") {
+  console.log(correctAnswers);
+  console.log(userAnswers);
+  getScore(correctAnswers, userAnswers);
+
+}
+
   res.redirect('/quiz');
 });
 
@@ -198,3 +217,13 @@ app.get("/further-reading", function(req, res) {
 app.listen('3000', function() {
   console.log("Server started on port 3000");
 });
+
+
+// <section class="user-score">
+//     <div>
+//         <% userAnswers.map(function() { %>
+//           <p> <%= randomQuestion %></p>
+//           <p> Your answer(s):</p>
+//         <% }); %>
+//     </div>
+// </section>
