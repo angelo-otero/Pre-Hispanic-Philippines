@@ -19,45 +19,70 @@
         <p>It's best to read through the rest of the website first. Googling the answers takes away the fun. Good luck! 😀</p>
         <% } %>
         <% if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-          <div class="choices-container">
-            <span>
-              <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
-              <label for="questionChoice1">
-                <%= choice1 %></label>
-            </span>
-            <span>
-              <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
-              <label for="questionChoice2">
-                <%= choice2 %></label>
-            </span>
-            <span>
-              <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
-              <label for="questionChoice3">
-                <%= choice3 %></label>
-            </span>
-            <span>
-              <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
-              <label for="questionChoice4">
-                <%= choice4 %></label>
-            </span>
-          </div>
+        <div class="choices-container">
+          <span>
+            <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
+            <label for="questionChoice1">
+              <%= choice1 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
+            <label for="questionChoice2">
+              <%= choice2 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
+            <label for="questionChoice3">
+              <%= choice3 %></label>
+          </span>
+          <span>
+            <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
+            <label for="questionChoice4">
+              <%= choice4 %></label>
+          </span>
+        </div>
 
 
         <% } %>
         <% if (randomQuestion === "You've finished!") { %>
-          <p>Congratulations!</p>
+        <p>Congratulations!</p>
         <% } %>
 
         <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-          <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
+        <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
         <%  } else if (questionNumber == 10) { %>
-          <button type="submit" class="btn btn-lg submit-answer">Get Score</button>
+        <button type="button" class="btn btn-lg submit-answer" data-toggle='modal' data-target="#scoreModal">Get Score</button>
         <% } else { %>
-          <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
+        <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
         <%  } %>
 
 
       </form>
+      <!-- Score Modal -->
+      <div class="modal fade" id="scoreModal" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="ModalTitle">Your Score:
+                <%= answerScore %>
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body user-score">
+               <% userAnswers.map(function() { %>
+                 <p> Correct Answers: <%= JSON.stringify(correctAnswers) %> </p>
+                 <p> Your answer(s): <%= JSON.stringify(userAnswers) %></p>
+               <% }); %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

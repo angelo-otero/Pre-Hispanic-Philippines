@@ -146,7 +146,10 @@ app.get("/quiz", function(req, res) {
     choice1: choice1,
     choice2: choice2,
     choice3: choice3,
-    choice4: choice4
+    choice4: choice4,
+    answerScore: answerScore,
+    userAnswers: userAnswers,
+    correctAnswers: correctAnswers
   });
 });
 
@@ -197,8 +200,8 @@ if(questionNumber > 1) {
 }
 
 if(randomQuestion == "You've finished!") {
-  console.log(correctAnswers);
-  console.log(userAnswers);
+  // console.log(correctAnswers);
+  // console.log(userAnswers);
   getScore(correctAnswers, userAnswers);
 
 }
@@ -217,13 +220,3 @@ app.get("/further-reading", function(req, res) {
 app.listen('3000', function() {
   console.log("Server started on port 3000");
 });
-
-
-// <section class="user-score">
-//     <div>
-//         <% userAnswers.map(function() { %>
-//           <p> <%= randomQuestion %></p>
-//           <p> Your answer(s):</p>
-//         <% }); %>
-//     </div>
-// </section>
