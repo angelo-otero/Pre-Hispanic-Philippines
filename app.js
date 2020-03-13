@@ -19,6 +19,8 @@ let choice3 = "";
 let choice4 = "";
 const correctAnswers = [];
 const userAnswers = [];
+const questions = [];
+const choicesArray = [];
 
 
 //array containing questions and their choices
@@ -149,20 +151,18 @@ app.get("/quiz", function(req, res) {
     choice4: choice4,
     answerScore: answerScore,
     userAnswers: userAnswers,
-    correctAnswers: correctAnswers
+    correctAnswers: correctAnswers,
+    questions: questions,
+    choicesArray: choicesArray
   });
 });
 
 function getScore (correctAnswers, userAnswers) {
-  const wrongAnswers = [];
-  for(let i = 0; i < userAnswers.length; i++){
+  for(let i = 0; i < correctAnswers.length; i++){
     if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])){
       answerScore++;
-    } else {
-      wrongAnswers.push(JSON.stringify(userAnswers[i]));
     }
   }
-  console.log(wrongAnswers);
   console.log(answerScore);
 }
 
@@ -188,20 +188,29 @@ app.post("/quiz", function(req, res) {
     choice3 = questionAndChoices[i].choice3;
     choice4 = questionAndChoices[i].choice4;
 
+    let obj2 = new Object();
+      obj2.a = choice1;
+      obj2.b = choice2;
+      obj2.c = choice3;
+      obj2.d = choice4;
+
     obj[inputName] = questionAndChoices[i].answer;
 
     correctAnswers.push(obj);
     questionAndChoices.splice(i, 1);
+    questions.push(randomQuestion);
     questionNumber++;
+    choicesArray.push(obj2);
+
   }
 
 if(questionNumber > 1) {
   userAnswers.push(reqBody);
+  console.log("User answer is " + Object.values(reqBody));
 }
 
 if(randomQuestion == "You've finished!") {
-  // console.log(correctAnswers);
-  // console.log(userAnswers);
+
   getScore(correctAnswers, userAnswers);
 
 }

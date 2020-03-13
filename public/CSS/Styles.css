@@ -483,23 +483,21 @@ footer li {
   margin-bottom: 30px;
 }
 
-/* .feedback {
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  width: 40%;
-  height: 50vh;
-  color: #ffffff;
-  background-color: gray;
-  border: 5px solid black;
+.fa-check, .fa-times {
+  margin-left: 10px;
 }
 
-.feedback-body {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  padding: 20%;
-} */
+.fa-check {
+  color: green;
+}
+
+.fa-times {
+  color: red;
+}
+
+.modal-dialog {
+  max-width: 700px;
+}
 
 /* About Page Styles */
 /* These are styles found on the about page */
