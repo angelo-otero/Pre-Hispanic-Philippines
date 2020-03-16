@@ -33,16 +33,16 @@ const questionAndChoices = [{
   choice3: '175',
   choice4: '25',
   answer: process.env.ANSWER_ONE
-  }, {
-    question: 'What are the three major regions of the Philippines?',
-    inputType: 'checkbox',
-    inputName: 'regions',
-    choice1: 'Mindoro',
-    choice2: 'Luzon',
-    choice3: 'Mindanao',
-    choice4: 'Visayas',
-    answer: process.env.ANSWER_TWO.split(',')
- }, {
+}, {
+  question: 'What are the three major regions of the Philippines?',
+  inputType: 'checkbox',
+  inputName: 'regions',
+  choice1: 'Mindoro',
+  choice2: 'Luzon',
+  choice3: 'Mindanao',
+  choice4: 'Visayas',
+  answer: process.env.ANSWER_TWO.split(',')
+}, {
   question: 'Who led the first Spanish expedition to the Philippines?',
   inputType: 'radio',
   inputName: 'conquistador',
@@ -114,7 +114,7 @@ const questionAndChoices = [{
   choice3: "Karimul Makhdum",
   choice4: "Muhammad Ali",
   answer: process.env.ANSWER_TEN
- }];
+}];
 
 app.set("view engine", "ejs");
 
@@ -157,13 +157,13 @@ app.get("/quiz", function(req, res) {
   });
 });
 
-function getScore (correctAnswers, userAnswers) {
-  for(let i = 0; i < correctAnswers.length; i++){
-    if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])){
+function getScore(correctAnswers, userAnswers, choicesArray) {
+  for (let i = 0; i < correctAnswers.length; i++) {
+    if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
       answerScore++;
     }
+
   }
-  console.log(answerScore);
 }
 
 
@@ -172,6 +172,7 @@ app.post("/quiz", function(req, res) {
   //randomly generate an integer between 0 and length of the array
   let i = Math.floor(Math.random() * questionAndChoices.length);
   let obj = {};
+  let obj2 = {};
 
   //checks to see if array is empty
   //if not empty, randomly choose and render a question and its choices object
@@ -188,32 +189,36 @@ app.post("/quiz", function(req, res) {
     choice3 = questionAndChoices[i].choice3;
     choice4 = questionAndChoices[i].choice4;
 
-    let obj2 = new Object();
-      obj2.a = choice1;
-      obj2.b = choice2;
-      obj2.c = choice3;
-      obj2.d = choice4;
+
 
     obj[inputName] = questionAndChoices[i].answer;
+    obj2.a = choice1;
+    obj2.b = choice2;
+    obj2.c = choice3;
+    obj2.d = choice4;
+
 
     correctAnswers.push(obj);
     questionAndChoices.splice(i, 1);
     questions.push(randomQuestion);
     questionNumber++;
     choicesArray.push(obj2);
+    console.log("");
+    console.log(Object.values(choicesArray));
+    console.log(Object.values(correctAnswers));
 
   }
 
-if(questionNumber > 1) {
-  userAnswers.push(reqBody);
-  console.log("User answer is " + Object.values(reqBody));
-}
+  if (questionNumber > 1) {
+    userAnswers.push(reqBody);
 
-if(randomQuestion == "You've finished!") {
+  }
 
-  getScore(correctAnswers, userAnswers);
+  if (randomQuestion == "You've finished!") {
 
-}
+    getScore(correctAnswers, userAnswers, choicesArray);
+
+  }
 
   res.redirect('/quiz');
 });
