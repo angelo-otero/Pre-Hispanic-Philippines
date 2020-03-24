@@ -3,8 +3,17 @@ require('dotenv').config();
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/leaderboardDB", { useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
+
+const leaderboardSchema = new mongoose.Schema ({
+  name: String,
+  score: Number
+});
+
+const User = mongoose.model("User", leaderboardSchema);
 
 // quiz variables
 let questionNumber = 0;
@@ -139,22 +148,26 @@ app.get("/highland", function(req, res) {
 });
 
 app.get("/quiz", function(req, res) {
-  res.render("quiz", {
-    randomQuestion: randomQuestion,
-    randomChoices: randomChoices,
-    questionNumber: questionNumber,
-    inputType: inputType,
-    inputName: inputName,
-    choice1: choice1,
-    choice2: choice2,
-    choice3: choice3,
-    choice4: choice4,
-    answerScore: answerScore,
-    userAnswers: userAnswers,
-    correctAnswers: correctAnswers,
-    questions: questions,
-    choicesArray: choicesArray
+  User.find({}, function(err, foundUsers){
+    res.render("quiz", {
+      randomQuestion: randomQuestion,
+      randomChoices: randomChoices,
+      questionNumber: questionNumber,
+      inputType: inputType,
+      inputName: inputName,
+      choice1: choice1,
+      choice2: choice2,
+      choice3: choice3,
+      choice4: choice4,
+      answerScore: answerScore,
+      userAnswers: userAnswers,
+      correctAnswers: correctAnswers,
+      questions: questions,
+      choicesArray: choicesArray,
+      foundUsers: foundUsers
+    });
   });
+
 });
 
 function getScore(correctAnswers, userAnswers, choicesArray) {
@@ -162,17 +175,18 @@ function getScore(correctAnswers, userAnswers, choicesArray) {
     if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
       answerScore++;
     }
-
   }
 }
 
 
 app.post("/quiz", function(req, res) {
   const reqBody = req.body;
+  const username = req.body.username;
   //randomly generate an integer between 0 and length of the array
   let i = Math.floor(Math.random() * questionAndChoices.length);
   let obj = {};
   let obj2 = {};
+  let isFinished = false;
 
   //checks to see if array is empty
   //if not empty, randomly choose and render a question and its choices object
@@ -203,23 +217,27 @@ app.post("/quiz", function(req, res) {
     questions.push(randomQuestion);
     questionNumber++;
     choicesArray.push(obj2);
-    console.log("");
-    console.log(Object.values(choicesArray));
-    console.log(Object.values(correctAnswers));
 
   }
 
-  if (questionNumber > 1) {
+  if (questionNumber > 1 && questionNumber != 10) {
     userAnswers.push(reqBody);
-
+    console.log(isFinished);
   }
 
-  if (randomQuestion == "You've finished!") {
+  if (randomQuestion == "You've finished!" && isFinished !== true) {
 
     getScore(correctAnswers, userAnswers, choicesArray);
 
+    const user = new User({
+      name: username,
+      score: answerScore
+    });
+    console.log("User Submit");
+    console.log(username);
+    isFinished = true;
+    console.log(isFinished);
   }
-
   res.redirect('/quiz');
 });
 

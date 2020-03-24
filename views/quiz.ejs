@@ -1,116 +1,150 @@
 <%- include('partials/header') -%>
 
-<section class="quiz">
-  <div class="question-and-answer general-padding">
-    <div class="question">
 
+<div class="page-container">
+  <section class="quiz">
+    <div class="question-and-answer general-padding">
+      <div class="question">
 
-      <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-      <h4 class="question-number">Question
-        <%= questionNumber %>/10:</h4>
-      <%  } %>
-
-      <h3 class="random-question">
-        <%= randomQuestion %>
-      </h3>
-
-      <form action="/quiz" id="choices" method="post">
-        <% if (questionNumber == 0) { %>
-        <p>It's best to read through the rest of the website first. Googling the answers takes away the fun. Good luck! 😀</p>
-        <% } %>
-        <% if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-        <div class="choices-container">
-          <span>
-            <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
-            <label for="questionChoice1">
-              a)
-              <%= choice1 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
-            <label for="questionChoice2">
-              b)
-              <%= choice2 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
-            <label for="questionChoice3">
-              c)
-              <%= choice3 %></label>
-          </span>
-          <span>
-            <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
-            <label for="questionChoice4">
-              d)
-              <%= choice4 %></label>
-          </span>
-        </div>
-
-
-        <% } %>
-        <% if (randomQuestion === "You've finished!") { %>
-        <p>Congratulations!</p>
-        <% } %>
 
         <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
-        <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
-        <%  } else if (questionNumber == 10) { %>
-        <button type="button" class="btn btn-lg submit-answer" data-toggle='modal' data-target="#scoreModal">Get Score</button>
-        <% } else { %>
-        <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
+        <h4 class="question-number">Question
+          <%= questionNumber %>/10:</h4>
         <%  } %>
 
+        <h3 class="random-question">
+          <%= randomQuestion %>
+        </h3>
 
-      </form>
-      <!-- Score Modal -->
-      <div class="modal fade" id="scoreModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="ModalTitle">Your Score:
-                <%= answerScore * 10 %>%
-              </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body user-score">
-              <% for (let i = 0; i < userAnswers.length; i++) { %>
-              <p>
-                <%= i + 1 %>)
-                <%= questions[i] %>
-              </p>
-
-                <% for (let b = 0; b < Object.values(choicesArray[i]).length; b++) { %>
-                  <p><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
-                <% } %>
-
-              <p>Correct Answer(s):
-                <%= Object.values(correctAnswers[i]) %>
-
-              </p>
-              <p>Your answer(s):
-                <%= Object.values(userAnswers[i]) %>
-                <% if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) { %>
-                <i class="fas fa-check"></i>
-                <% } else { %>
-                <i class="fas fa-times"></i>
-                <% } %>
-              </p>
-
-              <% }; %>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+        <form action="/quiz" id="choices" method="post">
+          <% if (questionNumber == 0) { %>
+          <p>It's best to read through the rest of the website first. Googling the answers takes away the fun. Good luck! 😀</p>
+          <% } %>
+          <% if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
+          <div class="choices-container">
+            <span>
+              <input type="<%= inputType %>" id="questionChoice1" name="<%= inputName %>" value="a">
+              <label for="questionChoice1">
+                a)
+                <%= choice1 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice2" name="<%= inputName %>" value="b">
+              <label for="questionChoice2">
+                b)
+                <%= choice2 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice3" name="<%= inputName %>" value="c">
+              <label for="questionChoice3">
+                c)
+                <%= choice3 %></label>
+            </span>
+            <span>
+              <input type="<%= inputType %>" id="questionChoice4" name="<%= inputName %>" value="d">
+              <label for="questionChoice4">
+                d)
+                <%= choice4 %></label>
+            </span>
           </div>
+
+
+          <% } %>
+          <% if (randomQuestion === "You've finished!") { %>
+          <p>Congratulations!</p>
+          <% } %>
+
+          <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
+          <button type="submit" class="btn btn-lg submit-answer">Submit Answer</button>
+          <%  } else if (questionNumber == 10) { %>
+          <button type="button" class="btn btn-lg submit-answer" data-toggle='modal' data-target="#scoreModal">Get Score</button>
+
+          <% } else { %>
+          <button type="submit" class="btn btn-lg submit-answer">Begin Quiz</button>
+          <%  } %>
+
+
+        </form>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Score Modal -->
+  <div class="modal fade" id="scoreModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitle">Your Score:
+            <%= answerScore * 10 %>%
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body user-score">
+          <% for (let i = 0; i < userAnswers.length; i++) { %>
+          <p>
+            <%= i + 1 %>)
+            <%= questions[i] %>
+          </p>
+
+            <% for (let b = 0; b < Object.values(choicesArray[i]).length; b++) { %>
+              <p><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
+            <% } %>
+
+          <p>Correct Answer(s):
+            <%= Object.values(correctAnswers[i]) %>
+
+          </p>
+          <p>Your answer(s):
+            <%= Object.values(userAnswers[i]) %>
+            <% if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) { %>
+            <i class="fas fa-check"></i>
+            <% } else { %>
+            <i class="fas fa-times"></i>
+            <% } %>
+          </p>
+
+          <% }; %>
+        </div>
+        <div class="modal-footer">
+          <form action="/quiz" method="post">
+            <input type="text" name="username" placeholder="Enter a name">
+            <button type="submit" class="btn btn-primary">Add to Leaderboard</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
         </div>
       </div>
     </div>
   </div>
 
-</section>
+  <section class="leaderboard">
+    <h4>Leaderboard</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Score</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <% foundUsers.forEach(function(user){ %>
+          <tr>
+            <th><%= foundUsers.name %></th>
+            <th><%= foundUsers.score %></th>
+          </tr>
+        <% }); %>
+      </tbody>
+
+    </table>
+  </section>
+</div>
+
 
 
 

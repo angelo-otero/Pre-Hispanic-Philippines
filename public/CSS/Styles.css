@@ -432,6 +432,12 @@ footer li {
 
 /* Quiz Page Styles */
 /* These are styles found on the quiz page */
+.page-container {
+  display: flex;
+  justify-content: space-between;
+  max-height: 85vh;
+}
+
 .quiz {
   min-height: 80vh;
   width: 100%;
@@ -497,6 +503,12 @@ footer li {
 
 .modal-dialog {
   max-width: 700px;
+}
+
+.leaderboard {
+  border: 1px solid black;
+  width: 20%;
+  overflow-y: scroll;
 }
 
 /* About Page Styles */
