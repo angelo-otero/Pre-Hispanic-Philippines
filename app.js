@@ -170,12 +170,23 @@ app.get("/quiz", function(req, res) {
 
 });
 
-function getScore(correctAnswers, userAnswers, choicesArray) {
-  for (let i = 0; i < correctAnswers.length; i++) {
-    if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
-      answerScore++;
+function getScore(correctAnswers, userAnswers, choicesArray, username) {
+  if(!username) {
+    for (let i = 0; i < correctAnswers.length; i++) {
+      if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
+        answerScore++;
+        console.log(answerScore);
+      }
     }
+  } else {
+    const user = new User({
+      name: username,
+      score: answerScore * 10
+    });
+    user.save();
+    console.log(user);
   }
+
 }
 
 
@@ -186,7 +197,6 @@ app.post("/quiz", function(req, res) {
   let i = Math.floor(Math.random() * questionAndChoices.length);
   let obj = {};
   let obj2 = {};
-  let isFinished = false;
 
   //checks to see if array is empty
   //if not empty, randomly choose and render a question and its choices object
@@ -220,23 +230,17 @@ app.post("/quiz", function(req, res) {
 
   }
 
-  if (questionNumber > 1 && questionNumber != 10) {
+  if (questionNumber > 1) {
     userAnswers.push(reqBody);
-    console.log(isFinished);
   }
 
-  if (randomQuestion == "You've finished!" && isFinished !== true) {
+  if (randomQuestion == "You've finished!") {
 
-    getScore(correctAnswers, userAnswers, choicesArray);
+    getScore(correctAnswers, userAnswers, choicesArray, username);
 
-    const user = new User({
-      name: username,
-      score: answerScore
-    });
+
     console.log("User Submit");
-    console.log(username);
-    isFinished = true;
-    console.log(isFinished);
+    console.log(userAnswers.length);
   }
   res.redirect('/quiz');
 });
