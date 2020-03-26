@@ -506,9 +506,57 @@ footer li {
 }
 
 .leaderboard {
-  border: 1px solid black;
+  border: 1px solid #2d3436;
   width: 20%;
   overflow-y: scroll;
+  text-align: center;
+}
+
+.leaderboard h4 {
+  text-decoration: underline;
+  background-color: #0984e3;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.leaderboard table {
+  margin: 5px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.leaderboard thead {
+  font-size: 1.25em;
+  border-bottom: 1px solid #2d3436;
+  background-color: #0984e3;
+  color: #ffffff;
+}
+
+
+.leaderboard th, td {
+  padding: 5px;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #b2bec3;
+}
+
+.end-question {
+  font-size: 1.15em;
+  margin-bottom: .5rem;
+}
+
+.end-choices {
+  margin-bottom: 0px;
+}
+
+.end-correct-answers {
+  margin-top: 1rem
+}
+
+.username {
+  margin-right: 10px;
 }
 
 /* About Page Styles */

@@ -86,20 +86,20 @@
         <div class="modal-body user-score">
           <% if(userAnswers.length <= 10) { %>
             <% for (let i = 0; i < userAnswers.length; i++) { %>
-            <p>
+            <p class="end-question">
               <%= i + 1 %>)
               <%= questions[i] %>
             </p>
 
               <% for (let b = 0; b < Object.values(choicesArray[i]).length; b++) { %>
-                <p><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
+                <p class="end-choices"><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
               <% } %>
 
-            <p>Correct Answer(s):
+            <p class="end-correct-answers">Correct Answer(s):
               <%= Object.values(correctAnswers[i]) %>
 
             </p>
-            <p>Your answer(s):
+            <p class="end-user-answers">Your answer(s):
               <%= Object.values(userAnswers[i]) %>
               <% if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) { %>
               <i class="fas fa-check"></i>
@@ -115,7 +115,7 @@
         </div>
         <div class="modal-footer">
           <form action="/quiz" method="post">
-            <input type="text" name="username" placeholder="Enter a name">
+            <input class="username" type="text" name="username" placeholder="Enter a name">
             <button type="submit" class="btn btn-primary">Add to Leaderboard</button>
           </form>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -126,7 +126,7 @@
   </div>
 
   <section class="leaderboard">
-    <h4>Leaderboard</h4>
+    <h4>Scoreboard</h4>
     <table>
       <thead>
         <tr>
@@ -138,8 +138,8 @@
       <tbody>
         <% foundUsers.forEach(function(user){ %>
           <tr>
-            <th><%= user.name %></th>
-            <th><%= user.score %>%</th>
+            <td><%= user.name %></td>
+            <td><%= user.score %>%</td>
           </tr>
         <% }); %>
       </tbody>
