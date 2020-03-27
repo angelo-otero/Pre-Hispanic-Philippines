@@ -79,7 +79,7 @@
           <h5 class="modal-title" id="ModalTitle">Your Score:
             <%= answerScore * 10 %>%
           </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick=<%= restartQuiz %>>
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -118,7 +118,7 @@
             <input class="username" type="text" name="username" placeholder="Enter a name">
             <button type="submit" class="btn btn-primary">Add to Leaderboard</button>
           </form>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=<%= restartQuiz %>>Close</button>
 
         </div>
       </div>

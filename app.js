@@ -30,6 +30,7 @@ const correctAnswers = [];
 const userAnswers = [];
 const questions = [];
 const choicesArray = [];
+const tempArray = [];
 
 
 //array containing questions and their choices
@@ -164,13 +165,16 @@ app.get("/quiz", function(req, res) {
       correctAnswers: correctAnswers,
       questions: questions,
       choicesArray: choicesArray,
-      foundUsers: foundUsers
+      foundUsers: foundUsers,
+      restartQuiz: "restartQuiz();"
     });
   });
 
 });
 
 function getScore(correctAnswers, userAnswers, choicesArray, username) {
+  // if there is no username, tally up score based on correct answers
+  // if score is tallied and user submits a username, save it to database
   if(!username) {
     for (let i = 0; i < correctAnswers.length; i++) {
       if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
@@ -184,11 +188,29 @@ function getScore(correctAnswers, userAnswers, choicesArray, username) {
       score: answerScore * 10
     });
     user.save();
-    console.log(user);
+    restartQuiz();
   }
 
 }
 
+function restartQuiz () {
+  // resets variables to default values
+  questionNumber = 0;
+  answerScore = 0;
+  randomQuestion = "Before you begin...";
+  randomChoices = "It's best that you read through the rest of the website first. It's no fun simply googling the answers. Good luck! 😀";
+
+  // add all quiz temporarily removed items back
+  tempArray.forEach(function(item){
+    questionAndChoices.push(item);
+  });
+  // removes values from previous quiz
+  correctAnswers.splice(0, correctAnswers.length);
+  userAnswers.splice(0, userAnswers.length);
+  questions.splice(0, questions.length);
+  choicesArray.splice(0, choicesArray.length);
+  console.log("Restart");
+}
 
 app.post("/quiz", function(req, res) {
   const reqBody = req.body;
@@ -222,6 +244,7 @@ app.post("/quiz", function(req, res) {
     obj2.d = choice4;
 
 
+    tempArray.push(questionAndChoices[i]);
     correctAnswers.push(obj);
     questionAndChoices.splice(i, 1);
     questions.push(randomQuestion);
@@ -238,9 +261,6 @@ app.post("/quiz", function(req, res) {
 
     getScore(correctAnswers, userAnswers, choicesArray, username);
 
-
-    console.log("User Submit");
-    console.log(userAnswers.length);
   }
   res.redirect('/quiz');
 });
