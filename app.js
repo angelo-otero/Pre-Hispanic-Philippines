@@ -31,6 +31,7 @@ const userAnswers = [];
 const questions = [];
 const choicesArray = [];
 const tempArray = [];
+let getScoreClicked = 0;
 
 
 //array containing questions and their choices
@@ -126,6 +127,28 @@ const questionAndChoices = [{
   answer: process.env.ANSWER_TEN
 }];
 
+
+  function restartQuiz () {
+    // resets variables to default values
+    questionNumber = 0;
+    answerScore = 0;
+    randomQuestion = "Before you begin...";
+    randomChoices = "It's best that you read through the rest of the website first. It's no fun simply googling the answers. Good luck! 😀";
+
+    // add all quiz temporarily removed items back
+    tempArray.forEach(function(item){
+      questionAndChoices.push(item);
+    });
+    // removes values from previous quiz
+    correctAnswers.splice(0, correctAnswers.length);
+    userAnswers.splice(0, userAnswers.length);
+    questions.splice(0, questions.length);
+    choicesArray.splice(0, choicesArray.length);
+    getScoreClicked = 0;
+    console.log("restart");
+  }
+
+
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({
@@ -166,7 +189,7 @@ app.get("/quiz", function(req, res) {
       questions: questions,
       choicesArray: choicesArray,
       foundUsers: foundUsers,
-      restartQuiz: "restartQuiz();"
+      tempArray: tempArray
     });
   });
 
@@ -175,6 +198,7 @@ app.get("/quiz", function(req, res) {
 function getScore(correctAnswers, userAnswers, choicesArray, username) {
   // if there is no username, tally up score based on correct answers
   // if score is tallied and user submits a username, save it to database
+  getScoreClicked++;
   if(!username) {
     for (let i = 0; i < correctAnswers.length; i++) {
       if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) {
@@ -190,27 +214,12 @@ function getScore(correctAnswers, userAnswers, choicesArray, username) {
     user.save();
     restartQuiz();
   }
-
+  if (getScoreClicked > 1) {
+    restartQuiz();
+  }
 }
 
-function restartQuiz () {
-  // resets variables to default values
-  questionNumber = 0;
-  answerScore = 0;
-  randomQuestion = "Before you begin...";
-  randomChoices = "It's best that you read through the rest of the website first. It's no fun simply googling the answers. Good luck! 😀";
 
-  // add all quiz temporarily removed items back
-  tempArray.forEach(function(item){
-    questionAndChoices.push(item);
-  });
-  // removes values from previous quiz
-  correctAnswers.splice(0, correctAnswers.length);
-  userAnswers.splice(0, userAnswers.length);
-  questions.splice(0, questions.length);
-  choicesArray.splice(0, choicesArray.length);
-  console.log("Restart");
-}
 
 app.post("/quiz", function(req, res) {
   const reqBody = req.body;
@@ -223,7 +232,7 @@ app.post("/quiz", function(req, res) {
   //checks to see if array is empty
   //if not empty, randomly choose and render a question and its choices object
   //then remove that object from the array
-  if (!questionAndChoices || !questionAndChoices.length) {
+  if (!questionAndChoices || !questionAndChoices.length || questionNumber == 10) {
     randomQuestion = "You've finished!";
     randomChoices = "Congratulations!";
   } else {
@@ -235,14 +244,11 @@ app.post("/quiz", function(req, res) {
     choice3 = questionAndChoices[i].choice3;
     choice4 = questionAndChoices[i].choice4;
 
-
-
     obj[inputName] = questionAndChoices[i].answer;
     obj2.a = choice1;
     obj2.b = choice2;
     obj2.c = choice3;
     obj2.d = choice4;
-
 
     tempArray.push(questionAndChoices[i]);
     correctAnswers.push(obj);
@@ -250,7 +256,7 @@ app.post("/quiz", function(req, res) {
     questions.push(randomQuestion);
     questionNumber++;
     choicesArray.push(obj2);
-
+    console.log(questionNumber);
   }
 
   if (questionNumber > 1) {
@@ -258,10 +264,9 @@ app.post("/quiz", function(req, res) {
   }
 
   if (randomQuestion == "You've finished!") {
-
     getScore(correctAnswers, userAnswers, choicesArray, username);
-
   }
+
   res.redirect('/quiz');
 });
 

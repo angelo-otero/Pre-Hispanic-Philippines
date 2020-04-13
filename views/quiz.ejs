@@ -1,11 +1,61 @@
 <%- include('partials/header') -%>
 
+<!-- Score Modal -->
+<div class="modal fade" id="scoreModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalTitle">Your Score:
+          <%= answerScore * 10 %>%
+        </h5>
+
+      </div>
+      <div class="modal-body user-score">
+        <% if(userAnswers.length <= 10) { %>
+          <% for (let i = 0; i < userAnswers.length; i++) { %>
+          <p class="end-question">
+            <%= i + 1 %>)
+            <%= questions[i] %>
+          </p>
+
+            <% for (let b = 0; b < Object.values(choicesArray[i]).length; b++) { %>
+              <p class="end-choices"><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
+            <% } %>
+
+          <p class="end-correct-answers">Correct Answer(s):
+            <%= Object.values(correctAnswers[i]) %>
+
+          </p>
+          <p class="end-user-answers">Your answer(s):
+            <%= Object.values(userAnswers[i]) %>
+            <% if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) { %>
+            <i class="fas fa-check"></i>
+            <% } else { %>
+            <i class="fas fa-times"></i>
+            <% } %>
+          </p>
+
+          <% }; %>
+        <% } %>
+
+
+      </div>
+      <div class="modal-footer">
+        <form action="/quiz" method="post">
+          <input class="username" type="text" name="username" placeholder="Enter a name">
+          <button type="submit" class="btn btn-primary add-user">Add to Leaderboard</button>
+          <button type="submit" class="btn btn-primary">Close</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="page-container">
   <section class="quiz">
     <div class="question-and-answer general-padding">
       <div class="question">
-
 
         <%  if (questionNumber > 0 && randomQuestion !== "You've finished!") { %>
         <h4 class="question-number">Question
@@ -70,61 +120,6 @@
 
   </section>
 
-
-  <!-- Score Modal -->
-  <div class="modal fade" id="scoreModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="scoreModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ModalTitle">Your Score:
-            <%= answerScore * 10 %>%
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick=<%= restartQuiz %>>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body user-score">
-          <% if(userAnswers.length <= 10) { %>
-            <% for (let i = 0; i < userAnswers.length; i++) { %>
-            <p class="end-question">
-              <%= i + 1 %>)
-              <%= questions[i] %>
-            </p>
-
-              <% for (let b = 0; b < Object.values(choicesArray[i]).length; b++) { %>
-                <p class="end-choices"><%= Object.keys(choicesArray[i])[b] %> <%= Object.values(choicesArray[i])[b] %></p>
-              <% } %>
-
-            <p class="end-correct-answers">Correct Answer(s):
-              <%= Object.values(correctAnswers[i]) %>
-
-            </p>
-            <p class="end-user-answers">Your answer(s):
-              <%= Object.values(userAnswers[i]) %>
-              <% if (JSON.stringify(correctAnswers[i]) == JSON.stringify(userAnswers[i])) { %>
-              <i class="fas fa-check"></i>
-              <% } else { %>
-              <i class="fas fa-times"></i>
-              <% } %>
-            </p>
-
-            <% }; %>
-          <% } %>
-
-
-        </div>
-        <div class="modal-footer">
-          <form action="/quiz" method="post">
-            <input class="username" type="text" name="username" placeholder="Enter a name">
-            <button type="submit" class="btn btn-primary">Add to Leaderboard</button>
-          </form>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick=<%= restartQuiz %>>Close</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
   <section class="leaderboard">
     <h4>Scoreboard</h4>
     <table>
@@ -147,8 +142,6 @@
     </table>
   </section>
 </div>
-
-
 
 
 

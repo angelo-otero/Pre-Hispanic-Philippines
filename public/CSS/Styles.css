@@ -433,14 +433,11 @@ footer li {
 /* Quiz Page Styles */
 /* These are styles found on the quiz page */
 .page-container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   max-height: 85vh;
 }
 
 .quiz {
-  min-height: 80vh;
-  width: 100%;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -506,9 +503,9 @@ footer li {
 }
 
 .leaderboard {
+  display: grid;
   border: 1px solid #2d3436;
-  width: 20%;
-  overflow-y: scroll;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   text-align: center;
 }
 
@@ -558,6 +555,10 @@ footer li {
 
 .username {
   margin-right: 10px;
+}
+
+.add-user {
+  margin-right: 5px;
 }
 
 /* About Page Styles */
