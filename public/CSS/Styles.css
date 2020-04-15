@@ -434,14 +434,17 @@ footer li {
 /* These are styles found on the quiz page */
 .page-container {
   display: grid;
-  max-height: 85vh;
+  grid-column-gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .quiz {
+  grid-column: 1/5;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-content: center;
+  padding-bottom: 5px;
 }
 
 .question-and-answer {
@@ -503,10 +506,10 @@ footer li {
 }
 
 .leaderboard {
-  display: grid;
+  padding-bottom: 5px;
   border: 1px solid #2d3436;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   text-align: center;
+  overflow-y: scroll;
 }
 
 .leaderboard h4 {
@@ -628,6 +631,12 @@ footer li {
 
 
 /* Media Queries */
+@media only screen and (max-width: 1267px) {
+  .leaderboard {
+    grid-column: 1/5;
+  }
+}
+
 @media only screen and (max-width: 1125px) {
   .highland-people {
     grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
@@ -636,11 +645,11 @@ footer li {
 
 @media only screen and (max-width: 999px) {
   body {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   .hero-landing {
-    height: 50vh;
+    min-height: 250px;
   }
 
   .page-description {
@@ -651,9 +660,16 @@ footer li {
     text-align: center;
   }
 
+  .card-lowland, .card-highland {
+    width: 100%;
+}
+
 }
 
 @media only screen and (max-width: 700px) {
+  .hero-landing {
+    min-height: 150px;
+  }
   footer p {
     text-align: left;
   }
@@ -680,9 +696,19 @@ footer li {
     max-width: 95%;
   }
 
+  .page-container {
+    min-height: 95vh;
+  }
+
+  .palawan-container {
+    grid-column-gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
 @media only screen and (max-width: 450px) {
+  .hero-landing {
+    height: 15vh;
+  }
   .time-period {
     grid-template-columns: repeat(auto-fill, minmax(275px ,1fr));
     grid-column-gap: 17%;
@@ -700,10 +726,6 @@ footer li {
 
   .highland-people {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-
-  .card-lowland, .card-highland {
-    width: 100%;
   }
 
   .lowland-group {
