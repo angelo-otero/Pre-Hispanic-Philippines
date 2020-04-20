@@ -122,24 +122,26 @@
 
   <section class="leaderboard">
     <h4>Scoreboard</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Score</th>
-        </tr>
-
-      </thead>
-      <tbody>
-        <% foundUsers.forEach(function(user){ %>
+    <div style="overflow-y: auto;">
+      <table>
+        <thead>
           <tr>
-            <td><%= user.name %></td>
-            <td><%= user.score %>%</td>
+            <th>User</th>
+            <th>Score</th>
           </tr>
-        <% }); %>
-      </tbody>
 
-    </table>
+        </thead>
+        <tbody>
+          <% foundUsers.forEach(function(user){ %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.score %>%</td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+
   </section>
 </div>
 
