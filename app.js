@@ -4,7 +4,7 @@ const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/leaderboardDB", { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.MONGO_PASSWORD, { useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 
