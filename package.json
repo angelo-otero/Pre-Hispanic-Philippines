@@ -23,10 +23,10 @@
   },
   "keywords": [],
   "author": "Angelo Otero",
+  "license": "ISC",
   "engines": {
     "node": "12.13.1"
   },
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/angelo-otero/Pre-Hispanic-Philippines/issues"
   },
